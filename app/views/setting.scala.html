@@ -1,0 +1,140 @@
+@(title: String)
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-slider.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/dashboard.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-glyphicons.css")">
+    <style type="text/css">
+      body { padding-top:20px; }
+      h2 { padding:20px; }
+    </style>
+
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+
+      <ul class="nav navbar-nav">
+        <li ><a href="dashboard"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li ><a href="workflow"><span class="glyphicon glyphicon-pencil">WorkflowEdit</a></li>
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-cloud"></span> APISetting</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<h2 class="panel-title">APISetting</h2>
+
+<div class="container">
+	<div class="row">
+        <div class="col-sm-12">
+            <legend>User: sipmi_user</legend>
+        </div>
+        <!-- panel preview -->
+        <div class="col-sm-5">
+
+            <h4>Add Function:</h4>
+
+            <div class="panel panel-default">
+                <div class="panel-body form-horizontal payment-form">
+                  <div class="form-group">
+                      <label for="function-name" class="col-sm-3">Function Name</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="function-name" name="function-name">
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="access-point" class="col-sm-3">Access Point</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="access-point" name="access-point">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-12 text-right">
+                        <br/>
+                        <button type="button" class="btn btn-default preview-add-button" onclick="insertRow('api-list')" >
+                          <span class="glyphicon glyphicon-plus"></span> Add
+                        </button>
+                        <br/><span>　</span>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div> <!-- / panel preview -->
+	</div>
+</div>
+
+
+
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-3">
+            <form action="#" method="get">
+                <div class="input-group">
+                    <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+
+                    <!-- <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span> -->
+                </div>
+            </form>
+        </div>
+		<div class="col-md-9">
+    	 <table class="table table-list-search" id="api-list">
+                    <thead>
+                        <tr>
+                            <th>Function Name</th>
+                            <th>Entry User</th>
+                            <th>Entry Datetime</th>
+                            <th>Access Point</th>
+                            <th>Del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sample FunctionX</td>
+                            <td>Taro</td>
+                            <td>1-11-2014 11:11</td>
+                            <td>http://google.com</td>
+                            <th><a onclick="deleteRow(this)" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
+                        </tr>
+                        <tr>
+                          <td>Sample FunctionY</td>
+                          <td>Jiro</td>
+                          <td>1-11-2015 22:22</td>
+                          <td>http://google.com</td>
+                          <th><a onclick="deleteRow(this)" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
+                        </tr>
+                        <tr>
+                          <td>Sample FunctionZ</td>
+                          <td>Taro</td>
+                          <td>1-11-2016 33:33</td>
+                          <td>http://google.com</td>
+                          <th><a onclick="deleteRow(this)" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
+                        </tr>
+                    </tbody>
+                </table>
+		</div>
+	</div>
+</div>
+
+</body>
+  <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/api.js")"></script>
+
+</html>
+
+

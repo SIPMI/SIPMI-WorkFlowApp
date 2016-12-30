@@ -1,0 +1,248 @@
+@(title: String)
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-slider.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/dashboard.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-glyphicons.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/workflow.css")">
+    <style type="text/css">
+      body { padding-top:20px; }
+      h2 { padding:20px; }
+    </style>
+    <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>
+
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+
+      <ul class="nav navbar-nav">
+        <li ><a href="dashboard"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        <li class="active"><a href="#"><span class="glyphicon glyphicon-pencil">WorkflowEdit</a></li>
+        <li ><a href="setting"><span class="glyphicon glyphicon-cloud"></span> APISetting</a></li>
+      </ul>
+
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<h2 class="panel-title">WorkflowEdit</h2>
+<h1 class="page-header">
+  SIP-MI Workflow
+  <button class="btn btn-default pull-right" id="save-to-file"><span class="glyphicon glyphicon-save-file"></span> Save WorkFlow </button>
+</h1>
+    <div class="container-fluid" style="width:100%; float:left">
+
+        <h3>Canvas</h3>
+
+        <div class="blockly-container">
+          <div id="blocklyDiv"></div>
+
+          <xml id="toolbox" style="display: none">
+            <category name="Input Data" colour="240">
+              <category name="type1" colour="120">
+              <block type="InputData"></block>
+              <block type="InputData2"></block>
+              </category>
+              <category name="type2" colour="120">
+                <block type="InputData3"></block>
+              </category>
+            </category>
+            <category name="Input Image" colour="240">
+              <category name="type1" colour="120">
+              <block type="InputImage"></block>
+              </category>
+              <category name="type2" colour="120">
+                <block type="InputImage2"></block>
+              </category>
+            </category>
+            <category name="Function" colour="200">
+              <category name="SampleFunction"  colour="100">
+                <block type="Binarization"></block>
+                <block type="ConvertGrayScale"></block>
+                <block type="CalcAverageBrightness"></block>
+              </category>
+              <category name="TypeA"  colour="100">
+                <block type="SampleFunctionX"></block>
+              </category>
+              <category name="TypeB"  colour="100">
+                <block type="SampleFunctionY"></block>
+                <block type="SampleFunctionZ"></block>
+              </category>
+            </category>
+            <category name="Logic" colour="300">
+              <category name="If" colour="150">
+                <block type="controls_if"></block>
+                <block type="controls_if">
+                  <mutation else="1"></mutation>
+                </block>
+                <block type="controls_if">
+                  <mutation elseif="1" else="1"></mutation>
+                </block>
+              </category>
+              <category name="Boolean" colour="150">
+                <block type="logic_compare"></block>
+                <block type="logic_operation"></block>
+                <block type="logic_negate"></block>
+                <block type="logic_boolean"></block>
+                <block type="logic_null"></block>
+                <block type="logic_ternary"></block>
+              </category>
+            </category>
+            <category name="Loops" colour="10">
+              <block type="controls_repeat_ext">
+                <value name="TIMES">
+                  <block type="math_number">
+                    <field name="NUM">10</field>
+                  </block>
+                </value>
+              </block>
+              <block type="controls_whileUntil"></block>
+              <block type="controls_for">
+                <field name="VAR">i</field>
+                <value name="FROM">
+                  <block type="math_number">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number">
+                    <field name="NUM">10</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="math_number">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+              </block>
+              <block type="controls_forEach"></block>
+              <block type="controls_flow_statements"></block>
+            </category>
+            <category name="Math" colour="30">
+              <block type="math_number"></block>
+              <block type="math_arithmetic"></block>
+              <block type="math_single"></block>
+              <block type="math_trig"></block>
+              <block type="math_constant"></block>
+              <block type="math_number_property"></block>
+              <block type="math_round"></block>
+              <block type="math_on_list"></block>
+              <block type="math_modulo"></block>
+              <block type="math_constrain">
+                <value name="LOW">
+                  <block type="math_number">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="HIGH">
+                  <block type="math_number">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+              <block type="math_random_int">
+                <value name="FROM">
+                  <block type="math_number">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+              </block>
+              <block type="math_random_float"></block>
+            </category>
+            <category name="Lists" colour="50">
+              <block type="lists_create_empty"></block>
+              <block type="lists_create_with"></block>
+              <block type="lists_repeat">
+                <value name="NUM">
+                  <block type="math_number">
+                    <field name="NUM">5</field>
+                  </block>
+                </value>
+              </block>
+              <block type="lists_length"></block>
+              <block type="lists_isEmpty"></block>
+              <block type="lists_indexOf"></block>
+              <block type="lists_getIndex"></block>
+              <block type="lists_setIndex"></block>
+            </category>
+            <category name="Variables" custom="VARIABLE"  colour="70">
+            </category>
+            <category name="Output Data" colour="350">
+              <category name="Output File" colour="170">
+              <block type="OutputData"></block>
+              <block type="text_print"></block>
+              </category>
+              <category name="Visualize Data" colour="170">
+                <block type="Visualize"></block>
+              </category>
+            </category>
+          </xml>
+
+          <xml id="startBlocks" style="display: none">
+
+          </xml>
+        </div>
+        <br>
+
+        <button class="btn btn-default" id="upload-xml-btn"><span class="glyphicon glyphicon-open-file"></span> Load WorkFlow</button>
+        <input type="file" id="upload-xml" style="display: none" >
+        <button class="btn btn-default btn-lg pull-right" id="execute-workflow">Execute <span class="glyphicon glyphicon-menu-right"></span></button>
+    </div>
+    <div class="container-fluid" style="width:100%; float:left">
+      <h3>Result</h3>
+        <div id="result-view" style="display:none">
+      	 <table class="table table-list-search">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th>Start Datetime</th>
+                    <th>End Datetime</th>
+                </tr>
+            </thead>
+            <tbody id="task_tr">
+
+            </tbody>
+        </table>
+      </div>
+
+
+    </div>
+ </body>
+    <script id="inp-file-template" type="text/template">
+    </script>
+
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/blockly_compressed.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/blocks_compressed.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/javascript_compressed.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/logic.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/math.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/lists.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/msg/js/en.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/lodash.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/blockly_ui.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/sipmi.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/task_list.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/main.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/result.js")"></script>
+
+</html>
+
+
