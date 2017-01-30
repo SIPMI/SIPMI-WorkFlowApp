@@ -1,10 +1,11 @@
-@(title: String)
+@(title: String, registedFunctionList: List[models.entity.TbFunction])
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>@title</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.min.css")">
@@ -18,26 +19,12 @@
 
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
+@navi(title)
 
-      <ul class="nav navbar-nav">
-        <li ><a href="dashboard"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li ><a href="workflow"><span class="glyphicon glyphicon-pencil">WorkflowEdit</a></li>
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-cloud"></span> APISetting</a></li>
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
-
-<h2 class="panel-title">APISetting</h2>
+<h2 class="panel-title">Setting API</h2>
 
 <div class="container">
 	<div class="row">
-        <div class="col-sm-12">
-            <legend>User: sipmi_user</legend>
-        </div>
         <!-- panel preview -->
         <div class="col-sm-5">
 
@@ -46,22 +33,9 @@
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                   <div class="form-group">
-                      <label for="function-name" class="col-sm-3">Function Name</label>
-                      <div class="col-sm-9">
-                          <input type="text" class="form-control" id="function-name" name="function-name">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="access-point" class="col-sm-3">Access Point</label>
-                      <div class="col-sm-9">
-                          <input type="text" class="form-control" id="access-point" name="access-point">
-                      </div>
-                  </div>
-
-                  <div class="form-group">
                       <div class="col-sm-12 text-right">
                         <br/>
-                        <button type="button" class="btn btn-default preview-add-button" onclick="insertRow('api-list')" >
+                        <button type="button" class="btn btn-default preview-add-button" onclick="location.href='/api_edit/0'" >
                           <span class="glyphicon glyphicon-plus"></span> Add
                         </button>
                         <br/><span>　</span>
@@ -95,40 +69,30 @@
                     <thead>
                         <tr>
                             <th>Function Name</th>
-                            <th>Entry User</th>
-                            <th>Entry Datetime</th>
+                            <th>Regist Datetime</th>
                             <th>Access Point</th>
+                            <th>Edit</th>
                             <th>Del</th>
                         </tr>
                     </thead>
                     <tbody>
+                    @for(registedFunction <- registedFunctionList) {
                         <tr>
-                            <td>Sample FunctionX</td>
-                            <td>Taro</td>
-                            <td>1-11-2014 11:11</td>
-                            <td>http://google.com</td>
-                            <th><a onclick="deleteRow(this)" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
+                            <td>@registedFunction.name / @registedFunction.typeName</td>
+                            <td>@registedFunction.getRegistDatetimeLabel()</td>
+                            <td>@registedFunction.url</td>
+                            <th><a href="/api_edit/@registedFunction.id" class="glyphicon glyphicon-edit" style="text-decoration: none;"></a></th>
+                            <th><a onclick="deleteApi(@registedFunction.id);" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
                         </tr>
-                        <tr>
-                          <td>Sample FunctionY</td>
-                          <td>Jiro</td>
-                          <td>1-11-2015 22:22</td>
-                          <td>http://google.com</td>
-                          <th><a onclick="deleteRow(this)" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
-                        </tr>
-                        <tr>
-                          <td>Sample FunctionZ</td>
-                          <td>Taro</td>
-                          <td>1-11-2016 33:33</td>
-                          <td>http://google.com</td>
-                          <th><a onclick="deleteRow(this)" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
-                        </tr>
+                    }
                     </tbody>
                 </table>
 		</div>
 	</div>
 </div>
-
+@helper.form( action = routes.SettingApiController.deleteApi, 'id -> "deleteApiForm"){
+	<input type="hidden" name="deleteApiId" id="deleteApiId" value="">
+}
 </body>
   <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>

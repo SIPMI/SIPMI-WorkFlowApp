@@ -1,55 +1,4 @@
 // Block definition
-Blockly.Blocks.PhaseField = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("PhaseField");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(65);
-  }
-};
-
-Blockly.Blocks.FlangeData = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("FlangeData");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(100);
-  }
-};
-
-Blockly.Blocks.BushingData = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("BushingData");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(100);
-  }
-};
-
-Blockly.Blocks.CustomData = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("CustomData");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(130);
-  }
-};
-
-Blockly.Blocks.Abaqus = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Abaqus");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setColour(200);
-  }
-};
-
-
 Blockly.Blocks['Visualize'] = {
   init: function() {
     this.appendDummyInput()
@@ -70,7 +19,7 @@ Blockly.Blocks.InputData = {
     this.appendDummyInput()
         .appendField("InputData")
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("lena.jpg", 100, 100, "*"));
+        .appendField(new Blockly.FieldImage("/assets/images/upload/lena.jpg", 100, 100, "*"));
     this.setOutput(true);
     //this.setPreviousStatement(false);
     //this.setNextStatement(true, "Boolean");
@@ -91,7 +40,7 @@ Blockly.Blocks.InputData2 = {
     this.appendDummyInput()
         .appendField("InputData2")
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("mandrill.jpg", 100, 100, "*"));
+        .appendField(new Blockly.FieldImage("/assets/images/upload/mandrill.jpg", 100, 100, "*"));
     this.setOutput(true);
     //this.setPreviousStatement(false);
     //this.setNextStatement(true, "Boolean");

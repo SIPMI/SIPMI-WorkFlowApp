@@ -1,0 +1,121 @@
+@(title: String, registedFileList: List[models.entity.TbUploadFile])
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>@title</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-slider.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/dashboard.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-glyphicons.css")">
+    <style type="text/css">
+      body { padding-top:20px; }
+      h2 { padding:20px; }
+    </style>
+
+  </head>
+  <body>
+@navi(title)
+
+<h2 class="panel-title">Setting File</h2>
+
+<div class="container">
+	<div class="row">
+        <!-- panel preview -->
+        <div class="col-sm-5">
+
+            <h4>Upload File:</h4>
+
+            <div class="panel panel-default">
+                <div class="panel-body form-horizontal payment-form">
+                @helper.form(action = routes.SettingFileController.registFile, 'enctype -> "multipart/form-data") {
+
+                  <div class="form-group">
+                      <label for="file-name" class="col-sm-3">File Name</label>
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="file-name" name="dispName">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="upload-file" class="col-sm-3">Upload File</label>
+                      <div class="col-sm-9">
+                          <input type="file" class="form-control" id="upload-file" name="uploadFile">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-12 text-right">
+                        <br/>
+                        <button type="submit" class="btn btn-default preview-add-button" onclick="" >
+                          upload
+                        </button>
+                        <br/><span>　</span>
+                      </div>
+                  </div>
+                }
+                </div>
+            </div>
+        </div> <!-- / panel preview -->
+	</div>
+</div>
+
+
+
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-3">
+            <form action="#" method="get">
+                <div class="input-group">
+                    <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+
+                    <!-- <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                    </span> -->
+                </div>
+            </form>
+        </div>
+		<div class="col-md-9">
+    	 <table class="table table-list-search" id="api-list">
+                    <thead>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Regist Datetime</th>
+                            <th>Image</th>
+                            <th>Del</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    @for(registedFile <- registedFileList) {
+                        <tr>
+                            <td>@registedFile.dispName</td>
+                            <td>@registedFile.getRegistDatetimeLabel()</td>
+                            <td><img src="/assets/images/upload/@registedFile.fileName" style="max-width: 100px;"></td>
+                            <th><a onclick="deleteFile(@registedFile.id);" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
+                        </tr>
+                    }
+
+                    </tbody>
+         </table>
+		</div>
+	</div>
+</div>
+@helper.form( action = routes.SettingFileController.deleteFile, 'id -> "deleteFileForm"){
+	<input type="hidden" name="deleteFileId" id="deleteFileId" value="">
+}
+</body>
+  <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/api.js")"></script>
+
+</html>
+
+

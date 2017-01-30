@@ -1,0 +1,106 @@
+@(title: String, form1: Form[models.entity.TbFunction])
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>@title</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-slider.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/dashboard.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-glyphicons.css")">
+    <style type="text/css">
+      body { padding-top:20px; }
+      h2 { padding:20px; }
+    </style>
+
+  </head>
+  <body>
+@navi(title)
+
+<h2 class="panel-title">Setting API</h2>
+
+<div class="container">
+	<div class="row">
+        <!-- panel preview -->
+        <div class="col-sm-5">
+
+            <h4>Edit Function:</h4>
+
+            <div class="panel panel-default">
+            @helper.form( action = routes.SettingApiController.registApi, 'id -> "form1"){
+                <div class="panel-body form-horizontal payment-form">
+				<input type="hidden" value="@form1("id").value" name="id">
+                  <div class="form-group">
+                  	<div class="col-sm-12 text-right">
+                      	@(helper.inputText(
+	                      		field = form1("name"),
+	                      		args = '_label -> "Name:",
+	                      				'size -> 70
+	                      	))
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="col-sm-12 text-right">
+                      	@(helper.inputText(
+	                      		field = form1("typeName"),
+	                      		args = '_label -> "Type Name:",
+	                      				'size -> 70
+	                      	))
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="col-sm-12 text-right">
+                      	@(helper.inputText(
+	                      		field = form1("url"),
+	                      		args = '_label -> "URL:",
+	                      				'size -> 70
+	                      	))
+                  	</div>
+                  </div>
+                  <div class="form-group">
+                  	<div class="col-sm-12 text-right">
+                      	@(helper.textarea(
+                      			field = form1("definition"),
+                      			args = '_label -> "Definition:",
+	                      				'rows -> 20,
+	                      				'cols -> 100
+                      		))
+                  	</div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-12 text-right">
+                        <br/>
+                        <button type="button" class="btn btn-default preview-add-button" onclick="location.href='/api_list'"  >
+                          <span class="glyphicon glyphicon-arrow-left"></span> Back
+                        </button>
+                        <button type="submit" class="btn btn-default preview-add-button" onclick="" >
+                          <span class="glyphicon glyphicon-plus"></span> Regist
+                        </button>
+                        <br/><span>　</span>
+                      </div>
+                  </div>
+
+                </div>
+            }
+            </div>
+        </div> <!-- / panel preview -->
+	</div>
+</div>
+
+
+
+
+</body>
+  <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/api.js")"></script>
+
+</html>
+
+

@@ -2,13 +2,36 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /                           controllers.Application.index()
+# root
+#GET     /                           controllers.Application.index()
+GET     /                           controllers.Default.redirect(to = "/dashboard")
+
+# dashboard
 GET     /dashboard                  controllers.DashboardController.showPage()
-GET     /workflow                   controllers.WorkflowController.showPage()
-GET     /setting                    controllers.SettingController.showPage()
+
+# workflow
+GET     /workflow/:id               controllers.WorkflowController.showPage(id: Long)
+POST    /registWork                 controllers.WorkflowController.registWork()
+
+# setting api
+GET     /api_list                   controllers.SettingApiController.showPage()
+POST    /deleteApi                  controllers.SettingApiController.deleteApi()
+GET     /api_edit/:id               controllers.SettingApiController.showEditPage(id: Long)
+POST    /registApi                  controllers.SettingApiController.registApi()
+
+# setting file
+GET     /file_list                  controllers.SettingFileController.showPage()
+POST    /deleteFile                 controllers.SettingFileController.deleteFile()
+POST    /registFile                 controllers.SettingFileController.registFile()
+
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /media/*file                controllers.Assets.at(path="/public", file)
+GET     /workflow/media/*file                controllers.Assets.at(path="/public", file)
+
+# Inner API
+POST    /convertGrayScale           controllers.ApiApplication.convertGrayScale()
+POST    /binarization               controllers.ApiApplication.binarize()
+

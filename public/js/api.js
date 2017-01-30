@@ -86,3 +86,21 @@ function deleteRow(obj) {
     // trのインデックスを取得して行を削除する
     tr.parentNode.deleteRow(tr.sectionRowIndex);
 }
+
+function deleteFile(deleteFileId) {
+    var target = document.getElementById("deleteFileForm");
+    $("#deleteFileId").val(deleteFileId);
+    var id = $("#deleteFileId").val();
+    target.method = "post";
+    target.submit();
+    return false;
+}
+
+function deleteApi(deleteApiId) {
+    var target = document.getElementById("deleteApiForm");
+    $("#deleteApiId").val(deleteApiId);
+    var id = $("#deleteApiId").val();
+    target.method = "post";
+    target.submit();
+    return false;
+}

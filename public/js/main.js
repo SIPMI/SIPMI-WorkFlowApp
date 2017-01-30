@@ -44,11 +44,29 @@ $(function() {
 
     parseXmlToTask(xml, taskList, varList);
 
-    $('#result-view').css('display','block');
+    var taskListTag = "";
+    taskList.forEach(function(value) {
+    	taskListTag += "<input type=hidden name=taskList[] value=" + value + " >";
+    	});
+    $('#taskListTag').html(taskListTag);
 
-    viewTaskList(taskList, varList);
+    var varListTag = "";
+    varList.forEach(function(value) {
+    	varListTag += "<input type=hidden name=varList[] value=" + value + " >";
+    	});
+    $('#varListTag').html(varListTag);
 
-    execTaskList(taskList, varList);
+
+    $('#workflowXml').val(xml.replace(/[\n\r]/g,""));
+    $('#workForm').submit();
+
+
+
+    //$('#result-view').css('display','block');
+
+    //viewTaskList(taskList, varList);
+
+    //execTaskList(taskList, varList);
 
   });
 
@@ -93,6 +111,9 @@ $(function() {
           if(attr[0].nodeValue == "math_number"){
             var varNode = nodes[nodeIdx].childNodes;
             varList.push(varNode[1].textContent);
+          }else{
+        	  var execFunc = "func" + attr[0].nodeValue + "(varList);";
+              eval(execFunc);
           }
         }
 
@@ -196,186 +217,203 @@ $(function() {
 
   }
 
+  var funcInputData = function (varList) {
+	  	varList.push("/public/images/upload/lena.jpg");
+	  }
 
+  var funcInputData2 = function (varList) {
+	  	varList.push("/public/images/upload/mandrill.jpg");
+	  }
 
-  var funcInputData = function (tmp_input) {
-    tmp_input.push("lena.jpg");
+  var funcBinarization = function (varList) {
+  }
+  var funcConvertGrayScale = function (varList) {
+  }
+  var funcVisualize = function (varList) {
   }
 
-  var funcInputData2 = function (tmp_input) {
-    tmp_input.push("mandrill.jpg");
-  }
-
-  var funcBinarization = function (varList,tmp_input) {
-    const DEFAULT_THRESHOLD = 70;
-
-    var threshold = DEFAULT_THRESHOLD;
-
-    if(varList[0] != null && varList[0] != ""){
-      threshold = varList[0];
-    }
-
-    $("#st_Binarization").text(setNowDatetime());
-    var canvas = document.getElementById("c1");
-    var ctx = canvas.getContext("2d");
-    var img = new Image();
-    img.src = tmp_input[0];
-    img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        var src = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        var dst = ctx.createImageData(canvas.width, canvas.height);
-
-        // for (var i = 0; i < src.data.length; i=i+4) {
-        //     var y = ~~(0.299 * src.data[i] + 0.587 * src.data[i + 1] + 0.114 * src.data[i + 2]);
-        //     var ret = (y > threshold) ? 255 : 0;
-        //     dst.data[i] = dst.data[i+1] = dst.data[i+2] = ret;
-        //     dst.data[i+3] = src.data[i+3];
-        // }
-
-        dst.data = calcBinarization(dst.data, src.data, threshold);
-
-        ctx.putImageData(dst, 0, 0);
-    };
-
-    $("#et_Binarization").text(setNowDatetime());
-    $("#s_Binarization").text("Done");
-
-  }
-
-  var calcBinarization  = function(arrBaseData, arrInputData, threshold){
-    var arrOutputData = Array();
-
-    // 各フィールドから値を取得してJSONデータを作成
-    var data = {
-        //arrBaseData: arrBaseData,
-        //arrInputData: arrInputData,
-        threshold: threshold,
-    };
 
 
-    //通信実行
-    $.ajax({
-        type:"post",                // method = "POST"
-        //url:"https://api-test-kota0913.c9users.io/binarization.php",
-        url:"http://sipmi.dev-bloom.com/binarization.php",        // POST送信先のURL
-        data:JSON.stringify(data),  // JSONデータ本体
-        contentType: 'application/json', // リクエストの Content-Type
-        async: false, // 非推奨だが今回はモックのため使用
-        dataType: "json",           // レスポンスをJSONとしてパースする
-        success: function(json_data) {   // 200 OK時
-            // JSON Arrayの先頭が成功フラグ、失敗の場合2番目がエラーメッセージ
-            // if (!json_data[0]) {    // サーバが失敗を返した場合
-            //     alert("Transaction error. " + json_data[1]);
-            //     return;
-            // }
-            // 成功時処理
-            alert("OK");
 
-        },
-        error: function() {         // HTTPエラー時
-            alert("Server Error. Pleasy try again later.");
-        },
-        complete: function() {      // 成功・失敗に関わらず通信が終了した際の処理
+//  var funcInputData = function (tmp_input) {
+//    tmp_input.push("lena.jpg");
+//  }
+//
+//  var funcInputData2 = function (tmp_input) {
+//    tmp_input.push("mandrill.jpg");
+//  }
 
-        }
-    });
+//  var funcBinarization = function (varList,tmp_input) {
+//    const DEFAULT_THRESHOLD = 70;
+//
+//    var threshold = DEFAULT_THRESHOLD;
+//
+//    if(varList[0] != null && varList[0] != ""){
+//      threshold = varList[0];
+//    }
+//
+//    $("#st_Binarization").text(setNowDatetime());
+//    var canvas = document.getElementById("c1");
+//    var ctx = canvas.getContext("2d");
+//    var img = new Image();
+//    img.src = tmp_input[0];
+//    img.onload = function() {
+//        canvas.width = img.width;
+//        canvas.height = img.height;
+//        ctx.drawImage(img, 0, 0);
+//        var src = ctx.getImageData(0, 0, canvas.width, canvas.height);
+//        var dst = ctx.createImageData(canvas.width, canvas.height);
+//
+//        // for (var i = 0; i < src.data.length; i=i+4) {
+//        //     var y = ~~(0.299 * src.data[i] + 0.587 * src.data[i + 1] + 0.114 * src.data[i + 2]);
+//        //     var ret = (y > threshold) ? 255 : 0;
+//        //     dst.data[i] = dst.data[i+1] = dst.data[i+2] = ret;
+//        //     dst.data[i+3] = src.data[i+3];
+//        // }
+//
+//        dst.data = calcBinarization(dst.data, src.data, threshold);
+//
+//        ctx.putImageData(dst, 0, 0);
+//    };
+//
+//    $("#et_Binarization").text(setNowDatetime());
+//    $("#s_Binarization").text("Done");
+//
+//  }
 
+//  var calcBinarization  = function(arrBaseData, arrInputData, threshold){
+//    var arrOutputData = Array();
+//
+//    // 各フィールドから値を取得してJSONデータを作成
+//    var data = {
+//        //arrBaseData: arrBaseData,
+//        //arrInputData: arrInputData,
+//        threshold: threshold,
+//    };
+//
+//
+//    //通信実行
+//    $.ajax({
+//        type:"post",                // method = "POST"
+//        //url:"https://api-test-kota0913.c9users.io/binarization.php",
+//        url:"http://sipmi.dev-bloom.com/binarization.php",        // POST送信先のURL
+//        data:JSON.stringify(data),  // JSONデータ本体
+//        contentType: 'application/json', // リクエストの Content-Type
+//        async: false, // 非推奨だが今回はモックのため使用
+//        dataType: "json",           // レスポンスをJSONとしてパースする
+//        success: function(json_data) {   // 200 OK時
+//            // JSON Arrayの先頭が成功フラグ、失敗の場合2番目がエラーメッセージ
+//            // if (!json_data[0]) {    // サーバが失敗を返した場合
+//            //     alert("Transaction error. " + json_data[1]);
+//            //     return;
+//            // }
+//            // 成功時処理
+//            alert("OK");
+//
+//        },
+//        error: function() {         // HTTPエラー時
+//            alert("Server Error. Pleasy try again later.");
+//        },
+//        complete: function() {      // 成功・失敗に関わらず通信が終了した際の処理
+//
+//        }
+//    });
+//
+//
+//    return arrBaseData;
+//
+//    for (var i = 0; i < arrInputData.length; i=i+4) {
+//        var y = ~~(0.299 * arrInputData[i] + 0.587 * arrInputData[i + 1] + 0.114 * arrInputData[i + 2]);
+//        var ret = (y > threshold) ? 255 : 0;
+//        arrBaseData[i] = arrBaseData[i+1] = arrBaseData[i+2] = ret;
+//        arrBaseData[i+3] = arrInputData[i+3];
+//    }
+//
+//    return arrBaseData;
+//  }
+//
+//  var funcConvertGrayScale = function (varList,tmp_input) {
+//    //const THRESHOLD = varList[0];
+//
+//    $("#st_ConvertGrayScale").text(setNowDatetime());
+//
+//    var canvas = document.getElementById("c1");
+//    var ctx = canvas.getContext("2d");
+//    var img = new Image();
+//    img.src = tmp_input[0];
+//    img.onload = function() {
+//        canvas.width = img.width;
+//        canvas.height = img.height;
+//        ctx.drawImage(img, 0, 0);
+//        var src = ctx.getImageData(0, 0, canvas.width, canvas.height);
+//        var dst = ctx.createImageData(canvas.width, canvas.height);
+//
+//        for (var i = 0; i < src.data.length; i=i+4) {
+//            var pixel = (src.data[i] + src.data[i+1] + src.data[i+2]) / 3;
+//            dst.data[i] = dst.data[i+1] = dst.data[i+2] = pixel;
+//            dst.data[i+3] = src.data[i+3];
+//        }
+//
+//        ctx.putImageData(dst, 0, 0);
+//    };
+//
+//    $("#et_ConvertGrayScale").text(setNowDatetime());
+//    $("#s_ConvertGrayScale").text("Done");
+//
+//  }
+//
+//  var funcCalcAverageBrightness = function (varList, tmp_input) {
+//
+//    $("#st_CalcAverageBrightness").text(setNowDatetime());
+//
+//    var canvas = document.getElementById("c1");
+//    var ctx = canvas.getContext("2d");
+//    var img = new Image();
+//    img.src = tmp_input[0];
+//    //img.onload = function() {
+//        ctx.drawImage(img, 0, 0);
+//        var imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
+//        var res = getYArray(imagedata.data);
+//        varList.push(res);
+//    //};
+//
+//    $("#et_CalcAverageBrightness").text(setNowDatetime());
+//    $("#s_CalcAverageBrightness").text("Done");
+//
+//  }
+//
+//  function getYArray(data) {
+//    var ys = new Array();
+//
+//    for (var i = 0; i < data.length; i= i + 4) {
+//        // 輝度(YUVのY)の計算を行う
+//        var y = ~~(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
+//        // 輝度の値をセット
+//        ys.push(y);
+//    }
+//
+//    return average(ys);
+//    }
+//
+//  var sum = function(arr, fn){
+//    if (fn) {
+//        return sum(arr.map(fn));
+//    }
+//    else {
+//        return arr.reduce(function(prev, current, i, arr) {
+//                return prev+current;
+//        });
+//    }
+//  };
+//
+//  var average = function(arr, fn) {
+//    return sum(arr, fn)/arr.length;
+//  };
+//
+//  var funcVisualize = function (tmp_input) {
+//    $("#result-view-image").css('display','block');
+//  }
 
-    return arrBaseData;
-
-    for (var i = 0; i < arrInputData.length; i=i+4) {
-        var y = ~~(0.299 * arrInputData[i] + 0.587 * arrInputData[i + 1] + 0.114 * arrInputData[i + 2]);
-        var ret = (y > threshold) ? 255 : 0;
-        arrBaseData[i] = arrBaseData[i+1] = arrBaseData[i+2] = ret;
-        arrBaseData[i+3] = arrInputData[i+3];
-    }
-
-    return arrBaseData;
-  }
-
-  var funcConvertGrayScale = function (varList,tmp_input) {
-    //const THRESHOLD = varList[0];
-
-    $("#st_ConvertGrayScale").text(setNowDatetime());
-
-    var canvas = document.getElementById("c1");
-    var ctx = canvas.getContext("2d");
-    var img = new Image();
-    img.src = tmp_input[0];
-    img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        var src = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        var dst = ctx.createImageData(canvas.width, canvas.height);
-
-        for (var i = 0; i < src.data.length; i=i+4) {
-            var pixel = (src.data[i] + src.data[i+1] + src.data[i+2]) / 3;
-            dst.data[i] = dst.data[i+1] = dst.data[i+2] = pixel;
-            dst.data[i+3] = src.data[i+3];
-        }
-
-        ctx.putImageData(dst, 0, 0);
-    };
-
-    $("#et_ConvertGrayScale").text(setNowDatetime());
-    $("#s_ConvertGrayScale").text("Done");
-
-  }
-
-  var funcCalcAverageBrightness = function (varList, tmp_input) {
-
-    $("#st_CalcAverageBrightness").text(setNowDatetime());
-
-    var canvas = document.getElementById("c1");
-    var ctx = canvas.getContext("2d");
-    var img = new Image();
-    img.src = tmp_input[0];
-    //img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        var imagedata = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        var res = getYArray(imagedata.data);
-        varList.push(res);
-    //};
-
-    $("#et_CalcAverageBrightness").text(setNowDatetime());
-    $("#s_CalcAverageBrightness").text("Done");
-
-  }
-
-  function getYArray(data) {
-    var ys = new Array();
-
-    for (var i = 0; i < data.length; i= i + 4) {
-        // 輝度(YUVのY)の計算を行う
-        var y = ~~(0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]);
-        // 輝度の値をセット
-        ys.push(y);
-    }
-
-    return average(ys);
-    }
-
-  var sum = function(arr, fn){
-    if (fn) {
-        return sum(arr.map(fn));
-    }
-    else {
-        return arr.reduce(function(prev, current, i, arr) {
-                return prev+current;
-        });
-    }
-  };
-
-  var average = function(arr, fn) {
-    return sum(arr, fn)/arr.length;
-  };
-
-  var funcVisualize = function (tmp_input) {
-    $("#result-view-image").css('display','block');
-  }
 
 
   $('#save-to-file').click(function (e) {

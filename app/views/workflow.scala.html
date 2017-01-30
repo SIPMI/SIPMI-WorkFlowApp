@@ -1,10 +1,11 @@
-@(title: String)
+@(title: String, functionList: List[models.entity.TbFunction], fileList: List[models.entity.TbUploadFile], workList: List[models.entity.TbWork], workflowXml: String, form1: Form[models.vo.ExTbWorkflowVo])
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>@title</title>
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.min.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.css")">
     <link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-theme.min.css")">
@@ -20,26 +21,11 @@
 
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-
-      <ul class="nav navbar-nav">
-        <li ><a href="dashboard"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-        <li class="active"><a href="#"><span class="glyphicon glyphicon-pencil">WorkflowEdit</a></li>
-        <li ><a href="setting"><span class="glyphicon glyphicon-cloud"></span> APISetting</a></li>
-      </ul>
-
-    </div><!--/.nav-collapse -->
-  </div>
-</div>
+@navi(title)
 
 <h2 class="panel-title">WorkflowEdit</h2>
-<h1 class="page-header">
-  SIP-MI Workflow
-  <button class="btn btn-default pull-right" id="save-to-file"><span class="glyphicon glyphicon-save-file"></span> Save WorkFlow </button>
-</h1>
-    <div class="container-fluid" style="width:100%; float:left">
+
+    <div class="container-fluid" style="width:100%;">
 
         <h3>Canvas</h3>
 
@@ -48,148 +34,29 @@
 
           <xml id="toolbox" style="display: none">
             <category name="Input Data" colour="240">
-              <category name="type1" colour="120">
+              <category name="Sample" colour="120">
               <block type="InputData"></block>
               <block type="InputData2"></block>
               </category>
-              <category name="type2" colour="120">
-                <block type="InputData3"></block>
-              </category>
-            </category>
-            <category name="Input Image" colour="240">
-              <category name="type1" colour="120">
-              <block type="InputImage"></block>
-              </category>
-              <category name="type2" colour="120">
-                <block type="InputImage2"></block>
+              <category name="Upload" colour="120">
+              @for(file <- fileList) {
+               <block type="@file.typeName"></block>
+              }
               </category>
             </category>
             <category name="Function" colour="200">
-              <category name="SampleFunction"  colour="100">
+              <category name="Local"  colour="100">
                 <block type="Binarization"></block>
                 <block type="ConvertGrayScale"></block>
-                <block type="CalcAverageBrightness"></block>
+                <!-- <block type="CalcAverageBrightness"></block> -->
               </category>
-              <category name="TypeA"  colour="100">
-                <block type="SampleFunctionX"></block>
-              </category>
-              <category name="TypeB"  colour="100">
-                <block type="SampleFunctionY"></block>
-                <block type="SampleFunctionZ"></block>
+              <category name="Remote"  colour="100">
+              @for(func <- functionList) {
+               <block type="@func.typeName"></block>
+              }
               </category>
             </category>
-            <category name="Logic" colour="300">
-              <category name="If" colour="150">
-                <block type="controls_if"></block>
-                <block type="controls_if">
-                  <mutation else="1"></mutation>
-                </block>
-                <block type="controls_if">
-                  <mutation elseif="1" else="1"></mutation>
-                </block>
-              </category>
-              <category name="Boolean" colour="150">
-                <block type="logic_compare"></block>
-                <block type="logic_operation"></block>
-                <block type="logic_negate"></block>
-                <block type="logic_boolean"></block>
-                <block type="logic_null"></block>
-                <block type="logic_ternary"></block>
-              </category>
-            </category>
-            <category name="Loops" colour="10">
-              <block type="controls_repeat_ext">
-                <value name="TIMES">
-                  <block type="math_number">
-                    <field name="NUM">10</field>
-                  </block>
-                </value>
-              </block>
-              <block type="controls_whileUntil"></block>
-              <block type="controls_for">
-                <field name="VAR">i</field>
-                <value name="FROM">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
-                <value name="TO">
-                  <block type="math_number">
-                    <field name="NUM">10</field>
-                  </block>
-                </value>
-                <value name="BY">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
-              </block>
-              <block type="controls_forEach"></block>
-              <block type="controls_flow_statements"></block>
-            </category>
-            <category name="Math" colour="30">
-              <block type="math_number"></block>
-              <block type="math_arithmetic"></block>
-              <block type="math_single"></block>
-              <block type="math_trig"></block>
-              <block type="math_constant"></block>
-              <block type="math_number_property"></block>
-              <block type="math_round"></block>
-              <block type="math_on_list"></block>
-              <block type="math_modulo"></block>
-              <block type="math_constrain">
-                <value name="LOW">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
-                <value name="HIGH">
-                  <block type="math_number">
-                    <field name="NUM">100</field>
-                  </block>
-                </value>
-              </block>
-              <block type="math_random_int">
-                <value name="FROM">
-                  <block type="math_number">
-                    <field name="NUM">1</field>
-                  </block>
-                </value>
-                <value name="TO">
-                  <block type="math_number">
-                    <field name="NUM">100</field>
-                  </block>
-                </value>
-              </block>
-              <block type="math_random_float"></block>
-            </category>
-            <category name="Lists" colour="50">
-              <block type="lists_create_empty"></block>
-              <block type="lists_create_with"></block>
-              <block type="lists_repeat">
-                <value name="NUM">
-                  <block type="math_number">
-                    <field name="NUM">5</field>
-                  </block>
-                </value>
-              </block>
-              <block type="lists_length"></block>
-              <block type="lists_isEmpty"></block>
-              <block type="lists_indexOf"></block>
-              <block type="lists_getIndex"></block>
-              <block type="lists_setIndex"></block>
-            </category>
-            <category name="Variables" custom="VARIABLE"  colour="70">
-            </category>
-            <category name="Output Data" colour="350">
-              <category name="Output File" colour="170">
-              <block type="OutputData"></block>
-              <block type="text_print"></block>
-              </category>
-              <category name="Visualize Data" colour="170">
-                <block type="Visualize"></block>
-              </category>
-            </category>
+            @block_list()
           </xml>
 
           <xml id="startBlocks" style="display: none">
@@ -198,13 +65,22 @@
         </div>
         <br>
 
-        <button class="btn btn-default" id="upload-xml-btn"><span class="glyphicon glyphicon-open-file"></span> Load WorkFlow</button>
+        <button class="btn btn-default" id="upload-xml-btn"><span class="glyphicon glyphicon-open-file"></span> Upload </button>
+        <button class="btn btn-default" id="save-to-file"><span class="glyphicon glyphicon-save-file"></span> Download </button>
         <input type="file" id="upload-xml" style="display: none" >
-        <button class="btn btn-default btn-lg pull-right" id="execute-workflow">Execute <span class="glyphicon glyphicon-menu-right"></span></button>
+        <button class="btn btn-default btn-lg pull-right" id="execute-workflow"> Execute <span class="glyphicon glyphicon-menu-right"></span></button>
+
+        @helper.form( action = routes.WorkflowController.registWork, 'id -> "workForm"){
+        	<textarea id="workflowXml" name="workflowXml" style="display:none"></textarea>
+        	<span id="taskListTag"></span>
+        	<span id="varListTag"></span>
+
+        }
     </div>
-    <div class="container-fluid" style="width:100%; float:left">
+    <div class="container-fluid" style="width:100%;">
+    @if(workList != null) {
       <h3>Result</h3>
-        <div id="result-view" style="display:none">
+      <div id="result-view">
       	 <table class="table table-list-search">
             <thead>
                 <tr>
@@ -216,16 +92,41 @@
                 </tr>
             </thead>
             <tbody id="task_tr">
-
+            @for(work <- workList) {
+             @if(work.getType() == 2) {
+             <tr>
+                <td>@work.sortNo</td>
+                <td>@work.task</td>
+                <td>@work.getStatusLabel()</td>
+                <td>@work.getStartDatetimeLabel()</td>
+                <td>@work.getEndDatetimeLabel()</td>
+             </tr>
+             }
+             @if(work.getType() == 1 || work.getType() == 3) {
+             <tr>
+                <td >@work.sortNo</td>
+                <td >@work.task</td>
+                <td colspan="4"><img src="@work.getImageSrc()" style="max-width: 100px;"></td>
+             </tr>
+             }
+             @if(work.getType() == 4) {
+             <tr>
+                <td >@work.sortNo</td>
+                <td >@work.task</td>
+                <td colspan="4">@work.getParamText()</td>
+             </tr>
+             }
+            }
             </tbody>
         </table>
       </div>
+    }
 
 
     </div>
  </body>
-    <script id="inp-file-template" type="text/template">
-    </script>
+  <script id="inp-file-template" type="text/template">
+  </script>
 
   <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
@@ -243,6 +144,23 @@
   <script type="text/javascript" src="@routes.Assets.at("js/main.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/result.js")"></script>
 
+  @for(func<- functionList) {
+  	<script type="text/javascript">@Html(func.definition)</script>
+  }
+
+  @for(file<- fileList) {
+  	<script type="text/javascript">
+  	@Html(
+  		models.blockly.BlockFactory.createJavascriptBlock(file.typeName, file.fileName)
+  	)
+  	</script>
+  }
+
+  <script type="text/javascript">_onLoadXml = '@Html(workflowXml)'</script>
+  <script type="text/javascript" src="@routes.Assets.at("js/onload.js")"></script>
+
 </html>
+
+
 
 
