@@ -1,7 +1,7 @@
 package controllers;
 
 import java.util.List;
-import views.html.*;
+
 import models.dao.TbFunctionDao;
 import models.dao.TbUploadFileDao;
 import models.dao.TbWorkDao;
@@ -11,6 +11,7 @@ import models.manager.WorkflowManager;
 import models.vo.ExTbWorkflowVo;
 import play.data.Form;
 import play.mvc.Result;
+import views.html.workflow;
 
 public class WorkflowController extends BaseController {
 
@@ -25,7 +26,7 @@ public class WorkflowController extends BaseController {
 					TbFunctionDao.findFunctionList(),
 					TbUploadFileDao.findUploadFileList(),
 					findWorkListByRequest(id),
-					findWorkflowXmlByRequest(),
+					TbWorkflowDao.findWorkflowXmlById(id),
 					exf
 					)
 				);
@@ -63,17 +64,17 @@ public class WorkflowController extends BaseController {
 	}
 
 
-	private static String findWorkflowXmlByRequest(){
-        String workflowXml = "";
-        Long id = null;
-        id = getIdByRequest();
-
-        if(id != null){
-        	workflowXml = TbWorkflowDao.findWorkflowXmlById(id);
-        }
-
-		return workflowXml;
-	}
+//	private static String findWorkflowXmlByRequest(){
+//        String workflowXml = "";
+//        Long id = null;
+//        id = getIdByRequest();
+//
+//        if(id != null){
+//        	workflowXml = TbWorkflowDao.findWorkflowXmlById(id);
+//        }
+//
+//		return workflowXml;
+//	}
 
 
 
