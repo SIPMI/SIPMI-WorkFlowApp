@@ -9,6 +9,7 @@ import javax.persistence.Id;
 
 import models.dao.TbWorkParamDao;
 import models.util.EnumUtil;
+import models.util.WorkStatusEnum;
 import play.db.ebean.Model;
 
 @Entity
@@ -31,6 +32,17 @@ public class TbWork extends Model {
 	public String getStatusLabel(){
 		return EnumUtil.getWorkStatusLabelByCode(this.status);
 	}
+
+	public Boolean isProcessing(){
+
+		Boolean isProcessing = false;
+		if(WorkStatusEnum.PROCESSING.getCode().equals(this.status)){
+			isProcessing = true;
+		}
+
+		return isProcessing;
+	}
+
 
 	public String getStartDatetimeLabel(){
 		if(this.startDatetime == null){
@@ -61,12 +73,16 @@ public class TbWork extends Model {
 	}
 
 
-	public String getParamText(){
+	public String getParamText(Integer paramNo){
 		String paramText = "";
+
+		if(paramNo == null){
+			paramNo = 1;
+		}
 
 		List<TbWorkParam> paramList = TbWorkParamDao.findWorkParamListByWorkId(this.id.longValue());
 		for(TbWorkParam param : paramList){
-			if(param.paramText != null && param.paramNo == 1){
+			if(param.paramText != null && param.paramNo == paramNo){
 				paramText = param.paramText;
 			}
 		}

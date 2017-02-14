@@ -20,25 +20,30 @@ public class WorkflowController extends BaseController {
 
 	public static Result showPage(Long id) {
 
+		Long workflowId = id;
+		if(getIdByRequest() != null && getIdByRequest() != 0){
+			workflowId = getIdByRequest();
+		}
+
 		Form<ExTbWorkflowVo> exf = new Form(ExTbWorkflowVo.class);
 		return ok(workflow.render(
 					PAGE_TITLE,
 					TbFunctionDao.findFunctionList(),
 					TbUploadFileDao.findUploadFileList(),
-					findWorkListByRequest(id),
-					TbWorkflowDao.findWorkflowXmlById(id),
+					findWorkListById(id),
+					TbWorkflowDao.findWorkflowXmlById(workflowId),
 					exf
 					)
 				);
     }
 
 
-	public static Result registWork() {
+
+	public static Result registWork(){
 
 		Long registedId = null;
-		String xml = null;
+//		String xml = null;
 
-		//Form<TbWorkflow> f = new Form(TbWorkflow.class).bindFromRequest();
 		Form<ExTbWorkflowVo> exf = new Form(ExTbWorkflowVo.class).bindFromRequest();
 
 		if(!exf.hasErrors()){
@@ -51,10 +56,21 @@ public class WorkflowController extends BaseController {
 	}
 
 
-	private static List<TbWork> findWorkListByRequest(Long id){
+
+//	private static List<TbWork> findWorkListByRequest(){
+//        List<TbWork> workList = null;
+//        Long id = null;
+//        id = getIdByRequest();
+//
+//        if(id != null){
+//        	workList = TbWorkDao.findWorkListById(id);
+//        }
+//
+//		return workList;
+//	}
+
+	private static List<TbWork> findWorkListById(Long id){
         List<TbWork> workList = null;
-        //Long id = null;
-        //id = getIdByRequest();
 
         if(id != null){
         	workList = TbWorkDao.findWorkListById(id);

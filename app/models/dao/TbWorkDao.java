@@ -10,6 +10,15 @@ import play.db.ebean.Model.Finder;
 
 public class TbWorkDao {
 
+
+
+	public static TbWork findWorkById(Long id){
+		Finder<Long, TbWork> workFinder = new Finder<Long, TbWork>(Long.class, TbWork.class);
+        return workFinder.byId(id);
+	}
+
+
+
 	public static List<TbWork> findWorkListById(Long id){
         Finder<Long, TbWork> workFinder = new Finder<Long, TbWork>(Long.class, TbWork.class);
         List<TbWork> workList = null;
@@ -39,7 +48,12 @@ public class TbWorkDao {
 			break;
 
 		case "math_number":
+		case "OutputData":
 			w.type = WorkTypeEnum.VALUE.getCode();
+			break;
+
+		case "controls_whileUntil":
+			w.type = WorkTypeEnum.LOGIC.getCode();
 			break;
 
 		default:

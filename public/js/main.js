@@ -42,31 +42,37 @@ $(function() {
     var taskList = new Array();
     var varList = new Array();
 
-    parseXmlToTask(xml, taskList, varList);
 
-    var taskListTag = "";
-    taskList.forEach(function(value) {
-    	taskListTag += "<input type=hidden name=taskList[] value=" + value + " >";
-    	});
-    $('#taskListTag').html(taskListTag);
+    if (xml.match(/controls_whileUntil/)) {
+    	// 特別なパターン
+    	getVarFromXml(xml, varList);
 
-    var varListTag = "";
-    varList.forEach(function(value) {
-    	varListTag += "<input type=hidden name=varList[] value=" + value + " >";
-    	});
-    $('#varListTag').html(varListTag);
+    	var varListTag = "";
+	    varList.forEach(function(value) {
+	    	varListTag += "<input type=hidden name=varList[] value=" + value + " >";
+	    	});
+	    $('#varListTag').html(varListTag);
 
+    }else{
+    	// 通常のｘｍｌ解析処理
+	    parseXmlToTask(xml, taskList, varList);
+	    var taskListTag = "";
+	    taskList.forEach(function(value) {
+	    	taskListTag += "<input type=hidden name=taskList[] value=" + value + " >";
+	    	});
+	    $('#taskListTag').html(taskListTag);
+
+	    var varListTag = "";
+	    varList.forEach(function(value) {
+	    	varListTag += "<input type=hidden name=varList[] value=" + value + " >";
+	    	});
+	    $('#varListTag').html(varListTag);
+
+    }
 
     $('#workflowXml').val(xml.replace(/[\n\r]/g,""));
     $('#workForm').submit();
 
-
-
-    //$('#result-view').css('display','block');
-
-    //viewTaskList(taskList, varList);
-
-    //execTaskList(taskList, varList);
 
   });
 
@@ -233,7 +239,40 @@ $(function() {
   }
 
 
+  var getVarFromXml = function (xml, varList) {
 
+	  var parser = new DOMParser();
+	  var dom = parser.parseFromString(xml, 'text/xml');
+	  var dom_1 = dom.getElementsByTagName('block').length;
+	  var node = dom.documentElement;
+
+	  var target = "InputData";
+
+	  if(xml.match(/InputData_\d+/)){
+		  target = xml.match(/InputData_\d+/);
+      }else if(xml.match(/InputData2/)){
+		  target = "InputData2";
+	  }else if(xml.match(/InputData/)){
+		  target = "InputData";
+	  }
+
+	  var execFunc = "func" + target + "(varList);";
+      eval(execFunc);
+
+      if(xml.match(/"NUM">[0-9\.]+</)){
+    	 var numList = xml.match(/"NUM">[0-9\.]+</g);
+    	 for (var i = 0; i < numList.length; i++) {
+    		 var varNum = numList[i].replace(/"NUM">([0-9\.]+)</, "$1");
+    		 if(! varNum.match(/\./)){
+    			 varNum = varNum + ".0";
+    		 }
+    		 varList.push(varNum);
+    	 }
+
+      }
+
+
+  }
 
 //  var funcInputData = function (tmp_input) {
 //    tmp_input.push("lena.jpg");

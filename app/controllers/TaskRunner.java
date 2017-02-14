@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -24,7 +25,7 @@ public class TaskRunner {
 	private static TaskRunner taskRunner = new TaskRunner();
 
     private TaskRunner(){
-        System.out.println("インスタンスを作成しました。");
+        System.out.println("create instance");
     }
 
     public static TaskRunner getInstance(){
@@ -35,7 +36,7 @@ public class TaskRunner {
 
     	Long workflowId = tbTask.workflowId.longValue();
 
-    	Logger.info("task id :" + tbTask.workflowId);
+    	Logger.info("task workflow_id :" + tbTask.workflowId);
 
     	TbWorkflow workflow = TbWorkflowDao.findWorkflowById(workflowId);
     	List<TbWork> workList = TbWorkDao.findWorkListById(workflowId);
@@ -46,32 +47,38 @@ public class TaskRunner {
     		Logger.info("task start");
     		TbWorkflowDao.updateForExecute(workflow);
 
-//    		try{
+    		try{
 
-	    		for(TbWork work: workList){
+	    		if(isDummy(workList)){
+	    			// ダミー処理実行
+	    			executeDummyLogic(workList);
+	    		}else{
+	    			// 通常処理実行
+	    			for(TbWork work: workList){
 
-	    			TbWorkDao.updateForExecute(work);
+		    			TbWorkDao.updateForExecute(work);
 
-//	    			try{
+		    			try{
 
-	    				executeWork(work);
-	    				TbWorkDao.updateForSuccess(work);
+		    				executeWork(work);
+		    				TbWorkDao.updateForSuccess(work);
 
-//	    			}catch(Exception e){
-//	    				TbWorkDao.updateForError(work);
-//	    				throw e;
-//	    			}
+		    			}catch(Exception e){
+		    				TbWorkDao.updateForError(work);
+		    				throw e;
+		    			}
 
+		    		}
 	    		}
 
 	    		TbWorkflowDao.updateForSuccess(workflow);
 	        	Logger.info("task done");
 
-//    		}catch(Exception e){
-//    			TbWorkflowDao.updateForError(workflow);
-//    			e.printStackTrace();
-//    			Logger.info("task error");
-//    		}
+    		}catch(Exception e){
+    			TbWorkflowDao.updateForError(workflow);
+    			//e.printStackTrace();
+    			Logger.info("task error");
+    		}
     	}else{
     		Logger.info("workflow not found");
     	}
@@ -96,7 +103,7 @@ public class TaskRunner {
 		//	Logger.info("get param :" + selfParam.paramStr);
 		//}else{
 		//	Logger.info("get param : null");
-		//}
+		//}s
 
 
     	switch(work.task){
@@ -171,6 +178,109 @@ public class TaskRunner {
 
 	    		}
 	    	}
+
+    }
+
+    // ダミー判断
+    private Boolean isDummy(List<TbWork> workList){
+
+    	Boolean isDummy = false;
+
+    	for(TbWork work : workList){
+    		// controls_whileUntilが含まれていたらダミーと判断
+    		if(work.task.equals("controls_whileUntil")){
+    			isDummy = true;
+    			break;
+        	}
+    	}
+
+    	return isDummy;
+
+    }
+
+    private void executeDummyLogic(List<TbWork> workList){
+
+    	Logger.info("execute DummyLogic");
+
+    	// 一旦初期値をセット
+    	Double i = 100.0;
+    	Double iPlus = 1.0;
+    	Double average = 200.0;
+    	Double averageUntil = 255.0;
+    	String inputData = "";
+    	String tmp_img = "";
+
+    	for(TbWork work : workList){
+    		if(work.task.equals("InputData")){
+    			List<TbWorkParam> paramList = TbWorkParamDao.findWorkParamListByWorkId(work.id.longValue());
+    			inputData = paramList.get(0).paramText;
+    		}else if(work.task.equals("controls_whileUntil")){
+    			List<TbWorkParam> paramList = TbWorkParamDao.findWorkParamListByWorkId(work.id.longValue());
+    			i = Double.valueOf(paramList.get(0).paramText);
+    			average = Double.valueOf(paramList.get(1).paramText);
+    			averageUntil = Double.valueOf(paramList.get(2).paramText);
+    			iPlus = Double.valueOf(paramList.get(3).paramText);
+    		}
+    	}
+
+    	Integer workflowId = 0;
+    	// 一旦削除して以下で入れ直す
+    	for(TbWork work : workList){
+    		if(work.sortNo != 1){
+    			work.delete();
+    		}else{
+    			workflowId = work.workflowId;
+    		}
+    	}
+
+    	Integer sortNo = 2;
+    	List<Long> workIdList;
+
+    	while(! (average < averageUntil)){
+    		Logger.info("i: " + i);
+    		workIdList = new ArrayList<Long>();
+
+    		workIdList.add(TbWorkDao.registWork("InputData", sortNo++, null, workflowId).longValue());
+    		workIdList.add(TbWorkDao.registWork("Binarization", sortNo++, null, workflowId).longValue());
+    		workIdList.add(TbWorkDao.registWork("Visualize", sortNo++, null, workflowId).longValue());
+    		workIdList.add(TbWorkDao.registWork("CalcAverageBrightness", sortNo++, null, workflowId).longValue());
+    		workIdList.add(TbWorkDao.registWork("OutputData", sortNo++, null, workflowId).longValue());
+
+    		// inputData
+
+    		TbWorkDao.updateForExecute(TbWorkDao.findWorkById(workIdList.get(0)));
+    		TbWorkParamDao.registWorkParam(workIdList.get(0).intValue(), 1, "InputData", inputData);
+    		TbWorkDao.updateForSuccess(TbWorkDao.findWorkById(workIdList.get(0)));
+
+    		// binarize
+    		TbWorkDao.updateForExecute(TbWorkDao.findWorkById(workIdList.get(1)));
+    		tmp_img = ImageUtil.binarize(inputData, i);
+    		TbWorkDao.updateForSuccess(TbWorkDao.findWorkById(workIdList.get(1)));
+
+    		// Visualize にセット
+    		TbWorkDao.updateForExecute(TbWorkDao.findWorkById(workIdList.get(2)));
+    		TbWorkParamDao.registWorkParam(workIdList.get(2).intValue(), 1, "Visualize", tmp_img);
+    		TbWorkDao.updateForSuccess(TbWorkDao.findWorkById(workIdList.get(2)));
+
+    		// calcAverageBrightness
+    		TbWorkDao.updateForExecute(TbWorkDao.findWorkById(workIdList.get(3)));
+    		average = Double.valueOf(ImageUtil.calcAverageBrightness(tmp_img));
+    		Logger.info("average: " + average);
+    		TbWorkDao.updateForSuccess(TbWorkDao.findWorkById(workIdList.get(3)));
+
+    		// OutputData にセット
+    		TbWorkDao.updateForExecute(TbWorkDao.findWorkById(workIdList.get(4)));
+    		TbWorkParamDao.registWorkParam(workIdList.get(4).intValue(), 1, "OutputData", average.toString());
+    		TbWorkDao.updateForSuccess(TbWorkDao.findWorkById(workIdList.get(4)));
+
+
+
+    		i = i + iPlus;
+    		tmp_img = null;
+    		workIdList = null;
+    	}
+
+
 
     }
 

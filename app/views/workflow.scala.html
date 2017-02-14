@@ -48,7 +48,7 @@
               <category name="Local"  colour="100">
                 <block type="Binarization"></block>
                 <block type="ConvertGrayScale"></block>
-                <!-- <block type="CalcAverageBrightness"></block> -->
+                <block type="CalcAverageBrightness"></block>
               </category>
               <category name="Remote"  colour="100">
               @for(func <- functionList) {
@@ -65,16 +65,21 @@
         </div>
         <br>
 
+        @if(workList.size == 0){
         <button class="btn btn-default" id="upload-xml-btn"><span class="glyphicon glyphicon-open-file"></span> Upload </button>
+        }
         <button class="btn btn-default" id="save-to-file"><span class="glyphicon glyphicon-save-file"></span> Download </button>
         <input type="file" id="upload-xml" style="display: none" >
-        <button class="btn btn-default btn-lg pull-right" id="execute-workflow"> Execute <span class="glyphicon glyphicon-menu-right"></span></button>
-
+        @if(workList.size > 0){
+       	<a href="/workflow/0?id=@workList.head.workflowId" class="btn btn-default btn-lg link-buttton" role="button"><span class="glyphicon glyphicon-copy"></span>Copy</a>
+        }
+        @if(workList.size == 0){
+        <button class="btn btn-default btn-lg pull-right" id="execute-workflow"> Execute <span class="glyphicon glyphicon-play-circle"></span></button>
+		}
         @helper.form( action = routes.WorkflowController.registWork, 'id -> "workForm"){
         	<textarea id="workflowXml" name="workflowXml" style="display:none"></textarea>
         	<span id="taskListTag"></span>
         	<span id="varListTag"></span>
-
         }
     </div>
     <div class="container-fluid" style="width:100%;">
@@ -97,7 +102,7 @@
              <tr>
                 <td>@work.sortNo</td>
                 <td>@work.task</td>
-                <td>@work.getStatusLabel()</td>
+                <td>@work.getStatusLabel() @if(work.isProcessing()){<img src="/assets/gif-load.gif"></img>}</td>
                 <td>@work.getStartDatetimeLabel()</td>
                 <td>@work.getEndDatetimeLabel()</td>
              </tr>
@@ -113,7 +118,14 @@
              <tr>
                 <td >@work.sortNo</td>
                 <td >@work.task</td>
-                <td colspan="4">@work.getParamText()</td>
+                <td colspan="4">@work.getParamText(1)</td>
+             </tr>
+             }
+             @if(work.getType() == 5) {
+             <tr>
+                <td >@work.sortNo</td>
+                <td >@work.task</td>
+                <td colspan="4">average  &lt; @work.getParamText(3) </td>
              </tr>
              }
             }

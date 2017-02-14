@@ -25,4 +25,19 @@ public class BlockFactory {
 		return blockStr.toString();
 	}
 
+
+	// 複雑なロジックを解析せずにDemo用の固定ワークリストを作成する
+	public static void createDemoWorkList(){
+
+
+
+	}
+
+	//
+	public static void executeDemoWorkList(){
+
+
+
+	}
+
 }

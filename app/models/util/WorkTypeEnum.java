@@ -5,6 +5,7 @@ public enum WorkTypeEnum {
 	FUNCTION("Function", "2"),
 	OUTPUT("Output", "3"),
 	VALUE("Value", "4"),
+	LOGIC("Logic", "5"),
     ;
 
     private final String label;

@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 
 import javax.imageio.ImageIO;
@@ -157,5 +158,47 @@ public class ImageUtil {
 		return new LookupOp(new ByteLookupTable(0, lookUpTable), null);
 	}
 
+	public static String calcAverageBrightness(String inputStr){
+
+		Double average = 0.0;
+    	byte[] inputBin = Base64.getDecoder().decode(inputStr);
+    	try{
+
+    		BufferedImage inputBuffered = getImageBufferedFromBytes(inputBin);
+    		average = calcAverage(inputBuffered);
+
+
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+
+		return average.toString();
+	}
+
+	public static Double calcAverage(BufferedImage image) {
+
+
+		WritableRaster raster = image.getRaster();
+
+		//int[] brightnessList = new int[raster.getNumDataElements()];
+		int[] brightnessList = new int[raster.getHeight() * raster.getWidth()];
+		int[] pixelBuffer = new int[raster.getNumDataElements()];
+		int index = 0;
+
+		for (int y = 0; y < raster.getHeight(); y++) {
+			for (int x = 0; x < raster.getWidth(); x++) {
+				// ピクセルごとに処理
+
+				raster.getPixel(x, y, pixelBuffer);
+
+				// 単純平均法((R+G+B)/3)でグレースケール化したときの輝度取得
+				int pixelAvg = (pixelBuffer[0] + pixelBuffer[1] + pixelBuffer[2]) / 3;
+
+				brightnessList[index++] = pixelAvg;
+			}
+		}
+
+		return Arrays.stream(brightnessList).average().getAsDouble();
+	}
 
 }

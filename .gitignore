@@ -1,6 +1,7 @@
 logs
 project/project
 project/target
+public/images/upload
 target
 tmp
 .history
@@ -16,3 +17,4 @@ conf/application.conf
 /.settings
 /.target/
 /bin/
+.DS_Store
