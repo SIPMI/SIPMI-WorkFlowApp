@@ -2,8 +2,11 @@ package controllers;
 
 import java.util.HashMap;
 
+import models.dao.TbWorkDao;
+import models.entity.TbWork;
 import models.util.ImageUtil;
 import models.vo.ApiParamForm;
+import play.Logger;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -36,6 +39,19 @@ public class ApiApplication extends Controller {
 
         return ok(Json.toJson(resMap));
     }
+
+	public static Result resultImage(Long id) {
+
+		Logger.info("api!!!!!:" + id);
+    	TbWork work = TbWorkDao.findWorkById(id);
+
+		String res = work.getImageSrc();
+
+		HashMap<String,String> resMap = new HashMap<String,String>();
+		resMap.put("img", res);
+
+		return ok(Json.toJson(resMap));
+	}
 
 
 

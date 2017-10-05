@@ -111,7 +111,10 @@
              <tr>
                 <td >@work.sortNo</td>
                 <td >@work.task</td>
-                <td colspan="4"><img src="@work.getImageSrc()" style="max-width: 100px;"></td>
+                  <td colspan="4"><img id="work_@work.id" src="" style="max-width: 100px;">
+                      <script type="text/javascript">@Html(work.getAsyncImageScript())</script>
+                      </td>
+
              </tr>
              }
              @if(work.getType() == 4) {

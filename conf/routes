@@ -12,6 +12,7 @@ GET     /dashboard                  controllers.DashboardController.showPage()
 # workflow
 GET     /workflow/:id               controllers.WorkflowController.showPage(id: Long)
 POST    /registWork                 controllers.WorkflowController.registWork()
+GET     /workflow/resultImage/:id            controllers.ApiApplication.resultImage(id: Long)
 
 # setting api
 GET     /api_list                   controllers.SettingApiController.showPage()
@@ -29,9 +30,8 @@ POST    /registFile                 controllers.SettingFileController.registFile
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /media/*file                controllers.Assets.at(path="/public", file)
-GET     /workflow/media/*file                controllers.Assets.at(path="/public", file)
+GET     /workflow/media/*file       controllers.Assets.at(path="/public", file)
 
 # Inner API
 POST    /convertGrayScale           controllers.ApiApplication.convertGrayScale()
 POST    /binarization               controllers.ApiApplication.binarize()
-
