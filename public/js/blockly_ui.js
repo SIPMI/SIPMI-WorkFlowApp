@@ -13,6 +13,20 @@ Blockly.Blocks['Visualize'] = {
   }
 };
 
+Blockly.Blocks['RegistVRApp'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("RegistVRApp");
+        this.appendValueInput("image:")
+            .setCheck(null);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(65);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
+};
+
 
 Blockly.Blocks.InputData = {
   init: function() {
@@ -78,6 +92,26 @@ Blockly.Blocks.InputData3 = {
   }
 };
 
+Blockly.Blocks.Carbon = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Carbon")
+        this.setOutput(true);
+        this.setColour(150);
+        this.setTooltip("Tooltip text.xxxxxx");
+    }
+};
+
+Blockly.Blocks.Chrome = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Chrome")
+        this.setOutput(true);
+        this.setColour(150);
+        this.setTooltip("Tooltip text.xxxxxx");
+    }
+};
+
 
 Blockly.Blocks['InputImage'] = {
   init: function() {
@@ -133,6 +167,23 @@ Blockly.Blocks['Binarization'] = {
     this.setTooltip('');
     this.setHelpUrl('http://www.example.com/');
  }
+};
+
+Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("OutputVRObjectFromThermocalc");
+        this.appendValueInput("element1")
+            .setCheck(null)
+            .appendField("element1:");
+        this.appendValueInput("element2:")
+            .setCheck(null)
+            .appendField("element2");
+        this.setOutput(true, null);
+        this.setColour(65);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
 };
 
 // Blockly.Blocks.ConvertGrayScale = {
@@ -265,6 +316,11 @@ Blockly.JavaScript.Visualize = function (block) {
   return code;
 };
 
+Blockly.JavaScript.RegistVRApp = function (block) {
+    var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.RegistVRApp));\n";
+    return code;
+};
+
 Blockly.JavaScript.InputData = function (block) {
   var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.InputData));\n";
   return code;
@@ -280,6 +336,16 @@ Blockly.JavaScript.InputData3 = function (block) {
   return code;
 };
 
+Blockly.JavaScript.Carbon = function (block) {
+    var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.Carbon));\n";
+    return code;
+};
+
+Blockly.JavaScript.Chrome = function (block) {
+    var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.Chrome));\n";
+    return code;
+};
+
 Blockly.JavaScript.InputImage = function (block) {
   var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.InputImage));\n";
   return code;
@@ -293,6 +359,11 @@ Blockly.JavaScript.InputImage2 = function (block) {
 Blockly.JavaScript.Binarization = function (block) {
   var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.Binarization));\n";
   return code;
+};
+
+Blockly.JavaScript.OutputVRObjectFromThermocalc = function (block) {
+    var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.OutputVRObjectFromThermocalc));\n";
+    return code;
 };
 
 Blockly.JavaScript.ConvertGrayScale = function (block) {

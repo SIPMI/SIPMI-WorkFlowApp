@@ -43,12 +43,18 @@
                <block type="@file.typeName"></block>
               }
               </category>
+              <category name="Element" colour="120">
+                <block type="Carbon"></block>
+                <block type="Chrome"></block>
+              </category>
             </category>
+
             <category name="Function" colour="200">
               <category name="Local"  colour="100">
                 <block type="Binarization"></block>
                 <block type="ConvertGrayScale"></block>
                 <block type="CalcAverageBrightness"></block>
+                <block type="OutputVRObjectFromThermocalc"></block>
               </category>
               <category name="Remote"  colour="100">
               @for(func <- functionList) {
@@ -129,6 +135,13 @@
                 <td >@work.sortNo</td>
                 <td >@work.task</td>
                 <td colspan="4">average  &lt; @work.getParamText(3) </td>
+             </tr>
+             }
+             @if(work.getType() == 6) {
+             <tr>
+                <td >@work.sortNo</td>
+                <td >@work.task</td>
+                <td colspan="4">@if(work.status == "30") {please Check Application.}</td>
              </tr>
              }
             }

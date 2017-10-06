@@ -6,6 +6,7 @@ public enum WorkTypeEnum {
 	OUTPUT("Output", "3"),
 	VALUE("Value", "4"),
 	LOGIC("Logic", "5"),
+    REGIST("Regist", "6"),
     ;
 
     private final String label;

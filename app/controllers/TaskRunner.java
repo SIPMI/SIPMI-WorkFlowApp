@@ -76,7 +76,7 @@ public class TaskRunner {
 
     		}catch(Exception e){
     			TbWorkflowDao.updateForError(workflow);
-    			//e.printStackTrace();
+    			e.printStackTrace();
     			Logger.info("task error");
     		}
     	}else{
@@ -118,6 +118,12 @@ public class TaskRunner {
 	    		TbWorkParamDao.registWorkParam(work.parentId, 1, "InputData", paramList.get(0).paramText);
 	    		break;
 
+			case "Carbon":
+			case "Chrome":
+				// 親のワークのパラメータに保存
+				//TbWorkParamDao.registWorkParam(work.parentId, 1, "InputData", paramList.get(0).paramText);
+				break;
+
 	    	case "ConvertGrayScale":
 	    		// 親のワークのパラメータに保存
 	    		TbWorkParamDao.registWorkParam(
@@ -138,7 +144,18 @@ public class TaskRunner {
 	    				);
 	    		break;
 
+			case "OutputVRObjectFromThermocalc":
+				// 親のワークのパラメータに保存
+//				TbWorkParamDao.registWorkParam(
+//						work.parentId,
+//						1,
+//						"OutputVRObjectFromThermocalc for RegistVRApp",
+//						ImageUtil.convertGrayScale(paramList.get(0).paramText)
+//				);
+				break;
+
 	    	case "Visualize":
+	    	case "RegistVRApp":
 	    		// 結果が自分のワークのパラメータに保存されているので
 	    		// ここでは何もしない
 	    		break;

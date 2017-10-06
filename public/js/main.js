@@ -146,9 +146,18 @@ $(function() {
         case "InputData2":
           viewTaskTag += '<tr><td >' + no + '</td><td >InputData <span id="l-gif1"></span></td><td colspan="4"><img src="mandrill.jpg" class="result-image"></td></tr>';
           break;
+          case "Carbon":
+              viewTaskTag += '<tr><td >' + no + '</td><td >InputData <span id="l-gif1"></span></td><td colspan="4">Carbon</td></tr>';
+              break;
+          case "Chrome":
+              viewTaskTag += '<tr><td >' + no + '</td><td >InputData <span id="l-gif1"></span></td><td colspan="4">Chrome</td></tr>';
+              break;
         case "Binarization":
           viewTaskTag += '<tr><td>' + no + '</td><td>Binarization <span id="l-gif_Binarization"></span></td><td><span id="s_Binarization">Not Yet</span></td><td><span id="st_Binarization">-</span></td><td><span id="et_Binarization">-</span></td></tr>';
           break;
+          case "OutputVRObjectFromThermocalc":
+              viewTaskTag += '<tr><td>' + no + '</td><td>Binarization <span id="l-gif_OutputVRObjectFromThermocalc"></span></td><td><span id="s_OutputVRObjectFromThermocalc">Not Yet</span></td><td><span id="st_OutputVRObjectFromThermocalc">-</span></td><td><span id="et_OutputVRObjectFromThermocalc">-</span></td></tr>';
+              break;
         case "ConvertGrayScale":
           viewTaskTag += '<tr><td>' + no + '</td><td>ConvertGrayScale <span id="l-gif_ConvertGrayScale"></span></td><td><span id="s_ConvertGrayScale">Not Yet</span></td><td><span id="st_ConvertGrayScale">-</span></td><td><span id="et_ConvertGrayScale">-</span></td></tr>';
           break;
@@ -196,6 +205,12 @@ $(function() {
         case "InputData2":
             funcInputData2(tmp_input);
           break;
+          case "Carbon":
+              funcCarbon(tmp_input);
+              break;
+          case "Chrome":
+              funcChrome(tmp_input);
+              break;
         case "Binarization":
             funcBinarization(varList,tmp_input);
             break;
@@ -205,12 +220,18 @@ $(function() {
         case "CalcAverageBrightness":
             funcCalcAverageBrightness(varList,tmp_input);
             break;
+          case "OutputVRObjectFromThermocalc":
+              funcOutputVRObjectFromThermocalc(varList,tmp_input);
+              break;
         case "OutputData":
             funcOutputData(tmp_input);
             break;
         case "Visualize":
             funcVisualize(tmp_input);
             break;
+          case "RegistVRApp":
+              funcRegistVRApp(tmp_input);
+              break;
         case "math_number":
             //funcMathNumber(tmp_input);
             break;
@@ -231,13 +252,25 @@ $(function() {
 	  	varList.push("/public/images/upload/mandrill.jpg");
 	  }
 
-  var funcBinarization = function (varList) {
+    var funcCarbon = function (varList) {
+        varList.push("Carbon");
+    }
+
+    var funcChrome = function (varList) {
+        varList.push("Chrome");
+    }
+
+
+    var funcBinarization = function (varList) {
   }
   var funcConvertGrayScale = function (varList) {
   }
+  var funcOutputVRObjectFromThermocalc = function (varList) {
+    }
   var funcVisualize = function (varList) {
   }
-
+  var funcRegistVRApp = function (varList) {
+  }
 
   var getVarFromXml = function (xml, varList) {
 
