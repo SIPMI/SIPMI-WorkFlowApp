@@ -98,15 +98,12 @@ public class TbWork extends Model {
 
 		StringBuilder scriptStr = new StringBuilder();
 
-		scriptStr.append("var loadImage" + this.id + " = true;\n");
-		scriptStr.append("var asyncObj" + this.id + " = setInterval(function() {\n");
-		scriptStr.append("if(loadImage" + this.id + "){\n");
+		scriptStr.append("var asyncObj" + this.id + " = function(){\n");
 		scriptStr.append("$.get(\"resultImage/" + this.id + "\",function(data){$(\"");
 		scriptStr.append("#work_" + this.id + "\"" );
 		scriptStr.append(").attr({'src':data.img});loadImage" + this.id + " = false;}); \n");
 		scriptStr.append("}\n");
-		scriptStr.append("clearInterval(asyncObj" + this.id + ");\n");
-		scriptStr.append("}, 100);\n");
+		scriptStr.append("setTimeout(asyncObj" + this.id + ", 100);\n");
 
 
 		return scriptStr.toString();
