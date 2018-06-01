@@ -39,19 +39,22 @@ public class TbWorkflowDao {
 	public static void updateForExecute(TbWorkflow data){
 		data.startDatetime = new Timestamp(System.currentTimeMillis());
 		data.status = WorkflowStatusEnum.PROCESSING.getCode();
-		data.save();
+//		data.save();
+		data.update(data.id);
 	}
 
 	public static void updateForSuccess(TbWorkflow data){
 		data.endDatetime = new Timestamp(System.currentTimeMillis());
 		data.status = WorkflowStatusEnum.FINISHED.getCode();
-		data.save();
+//		data.save();
+		data.update(data.id);
 	}
 
 	public static void updateForError(TbWorkflow data){
 		//data.endDatetime = new Timestamp(System.currentTimeMillis());
 		data.status = WorkflowStatusEnum.ERROR.getCode();
-		data.save();
+//		data.save();
+		data.update(data.id);
 	}
 
 }

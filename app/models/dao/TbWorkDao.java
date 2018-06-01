@@ -81,19 +81,22 @@ public class TbWorkDao {
     public static void updateForExecute(TbWork work) {
         work.startDatetime = new Timestamp(System.currentTimeMillis());
         work.status = WorkStatusEnum.PROCESSING.getCode();
-        work.save();
+//        work.save();
+        work.update(work.id);
     }
 
     public static void updateForSuccess(TbWork work) {
         work.endDatetime = new Timestamp(System.currentTimeMillis());
         work.status = WorkStatusEnum.DONE.getCode();
-        work.save();
+//        work.save();
+        work.update(work.id);
     }
 
     public static void updateForError(TbWork work) {
         //work.endDatetime = new Timestamp(System.currentTimeMillis());
         work.status = WorkStatusEnum.ERROR.getCode();
-        work.save();
+//        work.save();
+        work.update(work.id);
     }
 
     public Integer id;
