@@ -22,8 +22,6 @@ public class TbWorkParam extends Model {
 	public String paramText;
 //	@Lob
 //	public byte[] paramBlob;
-	@Version
-	public Timestamp lastUpdate;
 
 
 	public TbWorkParam(){

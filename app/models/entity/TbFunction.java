@@ -24,8 +24,6 @@ public class TbFunction extends Model {
 	@Column(name="definition", columnDefinition="LONGTEXT")
 	public String definition;
 	public Timestamp registDatetime;
-	@Version
-	public Timestamp lastUpdate;
 
 
 	public TbFunction(){

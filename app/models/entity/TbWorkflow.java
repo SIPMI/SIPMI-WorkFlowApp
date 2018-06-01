@@ -27,8 +27,6 @@ public class TbWorkflow extends Model {
 	@Column(name="workflow_xml", columnDefinition="text")
 	@NotNull
 	public String workflowXml;
-	@Version
-	public Timestamp lastUpdate;
 
 
 	public TbWorkflow(Integer id, String status, Timestamp startDatetime, Timestamp endDatetime, String workflowXml){

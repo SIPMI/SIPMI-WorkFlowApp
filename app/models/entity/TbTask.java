@@ -15,8 +15,6 @@ public class TbTask extends Model {
 	public Integer id;
 	public Timestamp registDatetime;
 	public Integer workflowId;
-	@Version
-	public Timestamp lastUpdate;
 
 
 	public TbTask(){

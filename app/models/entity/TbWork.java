@@ -28,8 +28,6 @@ public class TbWork extends Model {
 	public Integer parentId;
 	public Timestamp startDatetime;
 	public Timestamp endDatetime;
-	@Version
-	public Timestamp lastUpdate;
 
 
 	public String getStatusLabel(){

@@ -10,7 +10,6 @@ create table tb_function (
   url                       TEXT,
   definition                LONGTEXT,
   regist_datetime           datetime,
-  last_update               datetime not null,
   constraint pk_tb_function primary key (id))
 ;
 
@@ -18,7 +17,6 @@ create table tb_task (
   id                        integer auto_increment not null,
   regist_datetime           datetime,
   workflow_id               integer,
-  last_update               datetime not null,
   constraint pk_tb_task primary key (id))
 ;
 
@@ -29,7 +27,6 @@ create table tb_upload_file (
   file_name                 varchar(255),
   data_text                 LONGTEXT,
   regist_datetime           datetime,
-  last_update               datetime not null,
   constraint pk_tb_upload_file primary key (id))
 ;
 
@@ -43,7 +40,6 @@ create table tb_work (
   parent_id                 integer,
   start_datetime            datetime,
   end_datetime              datetime,
-  last_update               datetime not null,
   constraint pk_tb_work primary key (id))
 ;
 
@@ -53,7 +49,6 @@ create table tb_work_param (
   param_no                  integer,
   param_str                 varchar(255),
   param_text                LONGTEXT,
-  last_update               datetime not null,
   constraint pk_tb_work_param primary key (id))
 ;
 
@@ -63,7 +58,6 @@ create table tb_workflow (
   start_datetime            datetime,
   end_datetime              datetime,
   workflow_xml              text not null,
-  last_update               datetime not null,
   constraint pk_tb_workflow primary key (id))
 ;
 
