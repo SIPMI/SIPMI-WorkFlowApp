@@ -63,9 +63,14 @@ public class TaskRunner {
 		    				executeWork(work);
 		    				TbWorkDao.updateForSuccess(work);
 
-		    			}catch(Exception e){
-		    				TbWorkDao.updateForError(work);
-		    				throw e;
+		    			}catch(Exception e1){
+							e1.printStackTrace();
+							try{
+								TbWorkDao.updateForError(work);
+							}catch (Exception ex){
+								ex.printStackTrace();
+							}
+		    				throw e1;
 		    			}
 
 		    		}
@@ -74,12 +79,12 @@ public class TaskRunner {
 	    		TbWorkflowDao.updateForSuccess(workflow);
 	        	Logger.info("task done");
 
-    		}catch(Exception e){
-				e.printStackTrace();
+    		}catch(Exception e2){
+				e2.printStackTrace();
 				try{
 					TbWorkflowDao.updateForError(workflow);
-				}catch (Exception ex){
-					ex.printStackTrace();
+				}catch (Exception e3){
+					e3.printStackTrace();
 				}
 
     			Logger.info("task error");
