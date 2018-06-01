@@ -75,8 +75,8 @@ public class TaskRunner {
 	        	Logger.info("task done");
 
     		}catch(Exception e){
+				e.printStackTrace();
     			TbWorkflowDao.updateForError(workflow);
-    			e.printStackTrace();
     			Logger.info("task error");
     		}
     	}else{
