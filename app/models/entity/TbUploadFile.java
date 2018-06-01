@@ -25,8 +25,6 @@ public class TbUploadFile extends Model {
 //	@Lob
 //	public byte[] dataBlob;
 	public Timestamp registDatetime;
-	@Version
-	public Timestamp lastUpdate;
 
 
 	public TbUploadFile(){
