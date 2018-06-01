@@ -3,6 +3,7 @@ package models.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 import play.db.ebean.Model;
 
@@ -20,6 +21,8 @@ public class TbWorkParam extends Model {
 	public String paramText;
 //	@Lob
 //	public byte[] paramBlob;
+	@Version
+	public Timestamp lastUpdate;
 
 
 	public TbWorkParam(){

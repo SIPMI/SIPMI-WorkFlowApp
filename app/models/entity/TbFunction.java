@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 import play.db.ebean.Model;
 
@@ -23,6 +24,8 @@ public class TbFunction extends Model {
 	@Column(name="definition", columnDefinition="LONGTEXT")
 	public String definition;
 	public Timestamp registDatetime;
+	@Version
+	public Timestamp lastUpdate;
 
 
 	public TbFunction(){

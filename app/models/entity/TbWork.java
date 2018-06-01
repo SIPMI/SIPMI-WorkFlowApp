@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 import models.dao.TbWorkParamDao;
 import models.util.EnumUtil;
@@ -27,6 +28,8 @@ public class TbWork extends Model {
 	public Integer parentId;
 	public Timestamp startDatetime;
 	public Timestamp endDatetime;
+	@Version
+	public Timestamp lastUpdate;
 
 
 	public String getStatusLabel(){

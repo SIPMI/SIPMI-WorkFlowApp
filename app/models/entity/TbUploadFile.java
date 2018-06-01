@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 import play.db.ebean.Model;
 
@@ -24,6 +25,8 @@ public class TbUploadFile extends Model {
 //	@Lob
 //	public byte[] dataBlob;
 	public Timestamp registDatetime;
+	@Version
+	public Timestamp lastUpdate;
 
 
 	public TbUploadFile(){
