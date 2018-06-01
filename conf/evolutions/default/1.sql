@@ -58,6 +58,7 @@ create table tb_workflow (
   start_datetime            datetime,
   end_datetime              datetime,
   workflow_xml              text not null,
+  last_update               datetime not null,
   constraint pk_tb_workflow primary key (id))
 ;
 

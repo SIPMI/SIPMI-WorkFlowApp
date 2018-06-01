@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.persistence.Version;
 
 import models.util.EnumUtil;
 import play.data.validation.Constraints.Required;
@@ -26,6 +27,8 @@ public class TbWorkflow extends Model {
 	@Column(name="workflow_xml", columnDefinition="text")
 	@NotNull
 	public String workflowXml;
+	@Version
+	public Timestamp lastUpdate;
 
 
 	public TbWorkflow(Integer id, String status, Timestamp startDatetime, Timestamp endDatetime, String workflowXml){
