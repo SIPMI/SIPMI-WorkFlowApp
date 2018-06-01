@@ -40,6 +40,7 @@ create table tb_work (
   parent_id                 integer,
   start_datetime            datetime,
   end_datetime              datetime,
+  version                   integer not null,
   constraint pk_tb_work primary key (id))
 ;
 
@@ -58,6 +59,7 @@ create table tb_workflow (
   start_datetime            datetime,
   end_datetime              datetime,
   workflow_xml              text not null,
+  version                   integer not null,
   constraint pk_tb_workflow primary key (id))
 ;
 
