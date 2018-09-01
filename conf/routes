@@ -37,4 +37,4 @@ POST    /convertGrayScale           controllers.ApiApplication.convertGrayScale(
 POST    /binarization               controllers.ApiApplication.binarize()
 
 # For Let's Encrypt
-GET     /.well-known/acme-challenge/:key1.:key2 controllers.Application.letsEncrypt(key1: String, key2: String)
+GET     /.well-known/acme-challenge/$key<.+> controllers.Application.letsEncrypt(key: String)
