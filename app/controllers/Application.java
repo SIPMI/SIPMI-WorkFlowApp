@@ -12,7 +12,7 @@ public class Application extends Controller {
     }
 
     public static Result letsEncrypt(String id) {
-        return ok(index.render("workflow application is ready. !!!!!!"));
+        return ok(id);
     }
 
 }
