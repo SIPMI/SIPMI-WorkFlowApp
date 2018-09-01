@@ -11,4 +11,8 @@ public class Application extends Controller {
         return ok(index.render("workflow application is ready. !!!!!!"));
     }
 
+    public static Result letsEncrypt(String id) {
+        return ok(index.render("workflow application is ready. !!!!!!"));
+    }
+
 }
