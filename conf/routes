@@ -35,3 +35,6 @@ GET     /workflow/media/*file       controllers.Assets.at(path="/public", file)
 # Inner API
 POST    /convertGrayScale           controllers.ApiApplication.convertGrayScale()
 POST    /binarization               controllers.ApiApplication.binarize()
+
+# For Let's Encrypt
+GET     /.well-known/acme-challenge/:id controllers.Application.index()
