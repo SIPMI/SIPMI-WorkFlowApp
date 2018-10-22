@@ -20,6 +20,15 @@ create table tb_task (
   constraint pk_tb_task primary key (id))
 ;
 
+create table tb_template (
+  id                        integer auto_increment not null,
+  name                      varchar(255),
+  comment                   TEXT,
+  definition                LONGTEXT,
+  regist_datetime           datetime,
+  constraint pk_tb_template primary key (id))
+;
+
 create table tb_upload_file (
   id                        integer auto_increment not null,
   disp_name                 varchar(255),
@@ -40,7 +49,7 @@ create table tb_work (
   parent_id                 integer,
   start_datetime            datetime,
   end_datetime              datetime,
-  version                   integer not null,
+  version                   bigint not null,
   constraint pk_tb_work primary key (id))
 ;
 
@@ -59,7 +68,7 @@ create table tb_workflow (
   start_datetime            datetime,
   end_datetime              datetime,
   workflow_xml              text not null,
-  version                   integer not null,
+  version                   bigint not null,
   constraint pk_tb_workflow primary key (id))
 ;
 
@@ -73,6 +82,8 @@ SET FOREIGN_KEY_CHECKS=0;
 drop table tb_function;
 
 drop table tb_task;
+
+drop table tb_template;
 
 drop table tb_upload_file;
 

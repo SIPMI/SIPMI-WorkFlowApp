@@ -1,4 +1,4 @@
-@(title: String, registedFunctionList: List[models.entity.TbFunction])
+@(title: String, registedTemplateList: List[models.entity.TbTemplate])
 
 <!DOCTYPE html>
 <html>
@@ -21,21 +21,21 @@
   <body>
 @navi(title)
 
-<h2 class="panel-title">Setting API</h2>
+<h2 class="panel-title">Setting Template</h2>
 
 <div class="container">
 	<div class="row">
         <!-- panel preview -->
         <div class="col-sm-5">
 
-            <h4>Add Function:</h4>
+            <h4>Add Template:</h4>
 
             <div class="panel panel-default">
                 <div class="panel-body form-horizontal payment-form">
                   <div class="form-group">
                       <div class="col-sm-12 text-right">
                         <br/>
-                        <button type="button" class="btn btn-default preview-add-button" onclick="location.href='/api_edit/0'" >
+                        <button type="button" class="btn btn-default preview-add-button" onclick="location.href='/template_edit/0'" >
                           <span class="glyphicon glyphicon-plus"></span> Add
                         </button>
                         <br/><span>　</span>
@@ -68,21 +68,23 @@
     	 <table class="table table-list-search" id="api-list">
                     <thead>
                         <tr>
-                            <th>Function Name</th>
+                            <th>Template Name</th>
                             <th>Registration Datetime</th>
-                            <th>Access Point</th>
+                            <th>Comment</th>
+                            <th>Use</th>
                             <th>Edit</th>
                             <th>Del</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @for(registedFunction <- registedFunctionList) {
+                    @for(registedTemplate <- registedTemplateList) {
                         <tr>
-                            <td>@registedFunction.name / @registedFunction.typeName</td>
-                            <td>@registedFunction.getRegistDatetimeLabel()</td>
-                            <td>@registedFunction.url</td>
-                            <th><a href="/api_edit/@registedFunction.id" class="glyphicon glyphicon-edit" style="text-decoration: none;"></a></th>
-                            <th><a onclick="deleteApi(@registedFunction.id);" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
+                            <td>@registedTemplate.name</td>
+                            <td>@registedTemplate.getRegistDatetimeLabel()</td>
+                            <td>@registedTemplate.comment</td>
+                            <td><a href="/workflow/0?templateId=@registedTemplate.id"><span class="glyphicon glyphicon-open" style="text-decoration: none;"></span></a></td>
+                            <th><a href="/template_edit/@registedTemplate.id" class="glyphicon glyphicon-edit" style="text-decoration: none;"></a></th>
+                            <th><a onclick="deleteTemplate(@registedTemplate.id);" class="glyphicon glyphicon-remove" style="text-decoration: none;"></a></th>
                         </tr>
                     }
                     </tbody>
@@ -90,14 +92,14 @@
 		</div>
 	</div>
 </div>
-@helper.form( action = routes.SettingApiController.deleteApi, 'id -> "deleteApiForm"){
-	<input type="hidden" name="deleteApiId" id="deleteApiId" value="">
+@helper.form( action = routes.SettingTemplateController.deleteTemplate, 'id -> "deleteTemplateForm"){
+	<input type="hidden" name="deleteTemplateId" id="deleteTemplateId" value="">
 }
 </body>
   <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.min.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
-  <script type="text/javascript" src="@routes.Assets.at("js/api.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/template.js")"></script>
 
 </html>
 

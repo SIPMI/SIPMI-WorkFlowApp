@@ -29,46 +29,8 @@
 
         <h3>Canvas</h3>
 
-        <div class="blockly-container">
-          <div id="blocklyDiv"></div>
+        @blockly_container(functionList, fileList)
 
-          <xml id="toolbox" style="display: none">
-            <category name="Input Data" colour="240">
-              <category name="Sample" colour="120">
-              <block type="InputData"></block>
-              <block type="InputData2"></block>
-              </category>
-              <category name="Upload" colour="120">
-              @for(file <- fileList) {
-               <block type="@file.typeName"></block>
-              }
-              </category>
-              <category name="Element" colour="120">
-                <block type="Carbon"></block>
-                <block type="Chrome"></block>
-              </category>
-            </category>
-
-            <category name="Function" colour="200">
-              <category name="Local"  colour="100">
-                <block type="Binarization"></block>
-                <block type="ConvertGrayScale"></block>
-                <block type="CalcAverageBrightness"></block>
-                <block type="OutputVRObjectFromThermocalc"></block>
-              </category>
-              <category name="Remote"  colour="100">
-              @for(func <- functionList) {
-               <block type="@func.typeName"></block>
-              }
-              </category>
-            </category>
-            @block_list()
-          </xml>
-
-          <xml id="startBlocks" style="display: none">
-
-          </xml>
-        </div>
         <br>
 
         @if(workList.size == 0){
@@ -79,8 +41,9 @@
         @if(workList.size > 0){
        	<a href="/workflow/0?id=@workList.head.workflowId" class="btn btn-default btn-lg link-buttton" role="button"><span class="glyphicon glyphicon-copy"></span>Copy</a>
         }
+        <button type="button" class="btn btn-default preview-add-button" id="add-template-btn" ><span class="glyphicon glyphicon-plus"></span> Add Template</button>
         @if(workList.size == 0){
-        <button class="btn btn-default btn-lg pull-right" id="execute-workflow"> Execute <span class="glyphicon glyphicon-play-circle"></span></button>
+        <button class="btn btn-default btn-lg pull-right" id="execute-workflow"><span class="glyphicon glyphicon-play-circle"></span> Execute</button>
 		}
         @helper.form( action = routes.WorkflowController.registWork, 'id -> "workForm"){
         	<textarea id="workflowXml" name="workflowXml" style="display:none"></textarea>

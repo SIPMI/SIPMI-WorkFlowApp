@@ -544,5 +544,19 @@ $(function() {
   });
 
 
+    $('#add-template-btn').click(function (e) {
+        e.preventDefault();
+        var xml = ToXML();
+        var str_xml = xml.replace(/[\n\r]/g,"");
+
+        if( window.sessionStorage ){
+          sessionStorage['tmp_xml'] = str_xml;
+          window.open('/template_edit/0?fromWorkflow=true','_blank');
+        } else {
+          alert("cannot use sessionStorage");
+          return false;
+        }
+
+    });
 
 });

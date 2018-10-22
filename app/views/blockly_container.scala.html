@@ -1,0 +1,41 @@
+@(functionList: List[models.entity.TbFunction], fileList: List[models.entity.TbUploadFile])
+<div class="blockly-container">
+    <div id="blocklyDiv"></div>
+
+    <xml id="toolbox" style="display: none">
+        <category name="Input Data" colour="240">
+            <category name="Sample" colour="120">
+                <block type="InputData"></block>
+                <block type="InputData2"></block>
+            </category>
+            <category name="Upload" colour="120">
+            @for(file <- fileList) {
+                <block type="@file.typeName"></block>
+            }
+            </category>
+            <category name="Element" colour="120">
+                <block type="Carbon"></block>
+                <block type="Chrome"></block>
+            </category>
+        </category>
+
+        <category name="Function" colour="200">
+            <category name="Local"  colour="100">
+                <block type="Binarization"></block>
+                <block type="ConvertGrayScale"></block>
+                <block type="CalcAverageBrightness"></block>
+                <block type="OutputVRObjectFromThermocalc"></block>
+            </category>
+            <category name="Remote"  colour="100">
+            @for(func <- functionList) {
+                <block type="@func.typeName"></block>
+            }
+            </category>
+        </category>
+        @block_list()
+    </xml>
+
+    <xml id="startBlocks" style="display: none">
+
+          </xml>
+</div>

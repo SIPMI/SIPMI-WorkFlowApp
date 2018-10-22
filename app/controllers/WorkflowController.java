@@ -1,11 +1,11 @@
 package controllers;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-import models.dao.TbFunctionDao;
-import models.dao.TbUploadFileDao;
-import models.dao.TbWorkDao;
-import models.dao.TbWorkflowDao;
+import models.dao.*;
+import models.entity.TbTemplate;
 import models.entity.TbWork;
 import models.manager.WorkflowManager;
 import models.vo.ExTbWorkflowVo;
@@ -24,6 +24,17 @@ public class WorkflowController extends BaseController {
 		if(getIdByRequest() != null && getIdByRequest() != 0){
 			workflowId = getIdByRequest();
 		}
+		Long templateId = null;
+		if(workflowId == 0 && getTemplateIdByRequest() != null && getTemplateIdByRequest() != 0){
+			templateId = getTemplateIdByRequest();
+		}
+
+		String workflowXml = "";
+		if(templateId == null){
+			workflowXml = TbWorkflowDao.findWorkflowXmlById(workflowId);
+		}else{
+			workflowXml = TbTemplateDao.findTemplateXmlById(templateId);
+		}
 
 		Form<ExTbWorkflowVo> exf = new Form(ExTbWorkflowVo.class);
 		return ok(workflow.render(
@@ -31,7 +42,7 @@ public class WorkflowController extends BaseController {
 					TbFunctionDao.findFunctionList(),
 					TbUploadFileDao.findUploadFileList(),
 					findWorkListById(id),
-					TbWorkflowDao.findWorkflowXmlById(workflowId),
+					workflowXml,
 					exf
 					)
 				);
@@ -92,6 +103,13 @@ public class WorkflowController extends BaseController {
 //		return workflowXml;
 //	}
 
-
+	public static Long getTemplateIdByRequest(){
+		Map<String, String[]> queryStrings = request().queryString();
+		Long templateId = null;
+		if(queryStrings.get("templateId") != null){
+			templateId = Long.parseLong(Arrays.asList(queryStrings.get("templateId")).get(0));
+		}
+		return templateId;
+	}
 
 }

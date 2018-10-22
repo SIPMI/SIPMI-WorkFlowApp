@@ -6,8 +6,9 @@
       <ul class="nav navbar-nav">
 			<li @if(activePage == "Dashboard"){class="active"}><a href="/dashboard"><span class="glyphicon glyphicon-home"></span> Dashboard </a></li>
 			<li @if(activePage == "Workflow"){class="active"}><a href="/workflow/0"><span class="glyphicon glyphicon-pencil"></span> WorkflowEdit </a></li>
-	      	<li @if(activePage == "Setting API"){class="active"}><a href="/api_list"><span class="glyphicon glyphicon-cloud"></span> SettingAPI </a></li>
-	      	<li @if(activePage == "Setting File"){class="active"}><a href="/file_list"><span class="glyphicon glyphicon-file"></span> SettingFile </a></li>
+            <li @if(activePage == "Setting Template"){class="active"}><a href="/template_list"><span class="glyphicon glyphicon-file"></span> SettingTemplate </a></li>
+            <li @if(activePage == "Setting API"){class="active"}><a href="/api_list"><span class="glyphicon glyphicon-cloud"></span> SettingAPI </a></li>
+	      	<li @if(activePage == "Setting File"){class="active"}><a href="/file_list"><span class="glyphicon glyphicon-picture"></span> SettingFile </a></li>
       </ul>
     </div>
   </div>
