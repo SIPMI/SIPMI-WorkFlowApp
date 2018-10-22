@@ -2,7 +2,9 @@ package controllers;
 
 import java.util.List;
 
+import models.dao.TbTemplateDao;
 import models.dao.TbWorkflowDao;
+import models.entity.TbTemplate;
 import models.entity.TbWorkflow;
 import play.Logger;
 import play.db.ebean.Model.Finder;
@@ -18,7 +20,8 @@ public class DashboardController extends BaseController {
 	public static Result showPage() {
 
         List<TbWorkflow> workflowList = TbWorkflowDao.findWorkflowList();
-		return ok(dashboard.render(PAGE_TITLE, workflowList));
+		List<TbTemplate> templateList = TbTemplateDao.findTemplateList();
+		return ok(dashboard.render(PAGE_TITLE, workflowList, templateList));
     }
 
 }
