@@ -9,13 +9,8 @@ import java.util.List;
 public class TbTemplateDao {
 
 	public static List<TbTemplate> findTemplateList(){
-		Finder<Long, TbTemplate> templateFinder = new Finder<Long, TbTemplate>(Long.class, TbTemplate.class);
-        return templateFinder.all();
-	}
-
-	public static List<TbTemplate> findTemplateListOrderByRegistDate(){
-		Finder<Long, TbTemplate> templateFinder = new Finder<Long, TbTemplate>(Long.class, TbTemplate.class);
-		return templateFinder.orderBy("registDatetime ASC").findList();
+		Finder<Long, TbTemplate> finder = new Finder<Long, TbTemplate>(Long.class, TbTemplate.class);
+		return finder.orderBy().asc("id").findList();
 	}
 
 	public static TbTemplate findTemplateById(Long id){

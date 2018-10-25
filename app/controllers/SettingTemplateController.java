@@ -18,7 +18,7 @@ public class SettingTemplateController extends BaseController {
 
 	public static Result showPage() {
 
-		List<TbTemplate> templateList = TbTemplateDao.findTemplateListOrderByRegistDate();
+		List<TbTemplate> templateList = TbTemplateDao.findTemplateList();
 		return ok(setting_template.render(PAGE_TITLE, templateList));
     }
 

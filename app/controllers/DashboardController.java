@@ -20,7 +20,7 @@ public class DashboardController extends BaseController {
 	public static Result showPage() {
 
         List<TbWorkflow> workflowList = TbWorkflowDao.findWorkflowList();
-		List<TbTemplate> templateList = TbTemplateDao.findTemplateListOrderByRegistDate();
+		List<TbTemplate> templateList = TbTemplateDao.findTemplateList();
 		return ok(dashboard.render(PAGE_TITLE, workflowList, templateList));
     }
 
