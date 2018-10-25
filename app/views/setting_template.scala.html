@@ -94,6 +94,7 @@
 </div>
 @helper.form( action = routes.SettingTemplateController.deleteTemplate, 'id -> "deleteTemplateForm"){
 	<input type="hidden" name="deleteTemplateId" id="deleteTemplateId" value="">
+    <input type="hidden" name="returnPage" id="returnPage" value="/template_list">
 }
 </body>
   <script type="text/javascript" src="@routes.Assets.at("js/jquery.min.js")"></script>

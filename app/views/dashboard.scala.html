@@ -125,6 +125,7 @@
               </table>
               @helper.form( action = routes.SettingTemplateController.deleteTemplate, 'id -> "deleteTemplateForm"){
                   <input type="hidden" name="deleteTemplateId" id="deleteTemplateId" value="">
+                  <input type="hidden" name="returnPage" id="returnPage" value="/dashboard">
                   }
           </div>
       </div>

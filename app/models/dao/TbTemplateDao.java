@@ -1,7 +1,6 @@
 package models.dao;
 
 import models.entity.TbTemplate;
-import models.entity.TbWorkflow;
 import play.db.ebean.Model.Finder;
 
 import java.sql.Timestamp;
@@ -12,6 +11,11 @@ public class TbTemplateDao {
 	public static List<TbTemplate> findTemplateList(){
 		Finder<Long, TbTemplate> templateFinder = new Finder<Long, TbTemplate>(Long.class, TbTemplate.class);
         return templateFinder.all();
+	}
+
+	public static List<TbTemplate> findTemplateListOrderByRegistDate(){
+		Finder<Long, TbTemplate> templateFinder = new Finder<Long, TbTemplate>(Long.class, TbTemplate.class);
+		return templateFinder.orderBy("registDatetime ASC").findList();
 	}
 
 	public static TbTemplate findTemplateById(Long id){

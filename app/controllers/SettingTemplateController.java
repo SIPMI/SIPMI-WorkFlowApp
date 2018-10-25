@@ -18,7 +18,7 @@ public class SettingTemplateController extends BaseController {
 
 	public static Result showPage() {
 
-		List<TbTemplate> templateList = TbTemplateDao.findTemplateList();
+		List<TbTemplate> templateList = TbTemplateDao.findTemplateListOrderByRegistDate();
 		return ok(setting_template.render(PAGE_TITLE, templateList));
     }
 
@@ -29,7 +29,12 @@ public class SettingTemplateController extends BaseController {
 	    String id = requestData.get("deleteTemplateId");
 		TbTemplateDao.deleteTemplateById(Long.valueOf(id));
 
-		return redirect("/template_list");
+		String returnPage = requestData.get("returnPage");
+		if(returnPage == null || "".equals(returnPage)){
+			returnPage = "/dashboard";
+		}
+
+		return redirect(returnPage);
     }
 
 
