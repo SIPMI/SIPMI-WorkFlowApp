@@ -19,9 +19,9 @@
 
   </head>
   <body>
-@navi(title)
+    @navi(title)
 
-<h2 class="">Dashboard</h2>
+    <h2 class="">Dashboard</h2>
 
     <div class="container">
       <div class="row">
@@ -39,53 +39,11 @@
               </div>
           </div>
       </div>
-  </div>
-
-  <div class="container">
-  	<div class="row">
-        <h4>History:</h4>
-          <!--
-          <div class="col-md-3">
-              <form action="#" method="get">
-                  <div class="input-group">
-                      <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
-                      <span class="input-group-btn">
-                          <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                      </span>
-                  </div>
-              </form>
-          </div>
-          -->
-  		<div class="col-md-9">
-      	 <table class="table table-list-search">
-	       <thead>
-	           <tr>
-	               <th>No</th>
-	               <th>Status</th>
-	               <th>Start Datetime</th>
-	               <th>End Datetime</th>
-	               <th>Detail</th>
-	           </tr>
-	       </thead>
-           <tbody>
-               @for(work <- workflowList) {
-                <tr>
-                   <td>@work.id</td>
-                   <td>@work.getStatusLabel()</td>
-                   <td>@work.getStartDatetimeLabel()</td>
-                   <td>@work.getEndDatetimeLabel()</td>
-                   <td><a href="/workflow/@work.id"><span class="glyphicon glyphicon-search"></span></a></td>
-                </tr>
-               }
-           </tbody>
-         </table>
-  		</div>
-  	</div>
-  </div>
+    </div>
 
   <div class="container">
       <div class="row">
-          <h4>Template:</h4>
+          <h4 class="container-title">Template:<a class="r-side-position" href="/template_list">More Template</a></h4>
           <div class="col-md-3">
               <form action="#" method="get">
                   <div class="input-group">
@@ -127,6 +85,48 @@
                   <input type="hidden" name="deleteTemplateId" id="deleteTemplateId" value="">
                   <input type="hidden" name="returnPage" id="returnPage" value="/dashboard">
                   }
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <h4>History:</h4>
+              <!--
+      <div class="col-md-3">
+          <form action="#" method="get">
+              <div class="input-group">
+                  <input class="form-control" id="system-search" name="q" placeholder="Search for" required>
+                  <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                  </span>
+              </div>
+          </form>
+      </div>
+      -->
+          <div class="col-md-9">
+              <table class="table table-list-search">
+                  <thead>
+                      <tr>
+                          <th>No</th>
+                          <th>Status</th>
+                          <th>Start Datetime</th>
+                          <th>End Datetime</th>
+                          <th>Detail</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  @for(work <- workflowList) {
+                      <tr>
+                          <td>@work.id</td>
+                          <td>@work.getStatusLabel()</td>
+                          <td>@work.getStartDatetimeLabel()</td>
+                          <td>@work.getEndDatetimeLabel()</td>
+                          <td><a href="/workflow/@work.id"><span class="glyphicon glyphicon-search"></span></a></td>
+                      </tr>
+                  }
+                  </tbody>
+              </table>
           </div>
       </div>
   </div>
