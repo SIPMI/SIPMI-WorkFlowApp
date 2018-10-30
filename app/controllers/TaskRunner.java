@@ -164,6 +164,17 @@ public class TaskRunner {
 //				);
 				break;
 
+				case "OutputARObjectFromThermocalc"://ARBlockly
+					// 親のワークのパラメータに保存
+	//				TbWorkParamDao.registWorkParam(
+	//						work.parentId,
+	//						1,
+	//						"OutputARObjectFromThermocalc for RegistVRApp",
+	//						ImageUtil.convertGrayScale(paramList.get(0).paramText)
+	//				);
+					break;
+
+
 	    	case "Visualize":
 	    	case "RegistVRApp":
 	    		// 結果が自分のワークのパラメータに保存されているので
