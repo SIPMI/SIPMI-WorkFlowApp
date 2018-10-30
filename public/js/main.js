@@ -158,6 +158,10 @@ $(function() {
           case "OutputVRObjectFromThermocalc":
               viewTaskTag += '<tr><td>' + no + '</td><td>Binarization <span id="l-gif_OutputVRObjectFromThermocalc"></span></td><td><span id="s_OutputVRObjectFromThermocalc">Not Yet</span></td><td><span id="st_OutputVRObjectFromThermocalc">-</span></td><td><span id="et_OutputVRObjectFromThermocalc">-</span></td></tr>';
               break;
+              //ARBlockly
+          case "OutputARObjectFromThermocalc":
+              viewTaskTag += '<tr><td>' + no + '</td><td>Binarization <span id="l-gif_OutputARObjectFromThermocalc"></span></td><td><span id="s_OutputARObjectFromThermocalc">Not Yet</span></td><td><span id="st_OutputARObjectFromThermocalc">-</span></td><td><span id="et_OutputARObjectFromThermocalc">-</span></td></tr>';
+              break;
         case "ConvertGrayScale":
           viewTaskTag += '<tr><td>' + no + '</td><td>ConvertGrayScale <span id="l-gif_ConvertGrayScale"></span></td><td><span id="s_ConvertGrayScale">Not Yet</span></td><td><span id="st_ConvertGrayScale">-</span></td><td><span id="et_ConvertGrayScale">-</span></td></tr>';
           break;
