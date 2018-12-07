@@ -201,4 +201,15 @@ public class ImageUtil {
 		return Arrays.stream(brightnessList).average().getAsDouble();
 	}
 
+	public static void printmake() {
+			try {
+					FileWriter fw = new FileWriter("test.txt");
+					fw.write("テスト");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
+					fw.close();
+			} catch (IOException ex) {
+					ex.printStackTrace();
+			}
+	}
+	//データベースにファイル生成、書き込み
+
 }
