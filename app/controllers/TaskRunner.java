@@ -175,7 +175,7 @@ public class TaskRunner {
 							1,
 							"OutputARObjectFromThermocalc for RegistVRApp",
 							//ImageUtil.convertGrayScale(paramList.get(0).paramText)
-	ImageUtil.printmake()
+	ImageUtil.printmake(Double.parseDouble(paramList.get(1).paramText))
 	//				);
 
 //フローチャート
