@@ -16,7 +16,6 @@ var SIPMI = (function () {
     OutputData:  201,
     InputImage: 301,
     InputImage: 302,
-    OutputARObjectFromThermocalc: 10
   };
 
   var InputFiles = {};
