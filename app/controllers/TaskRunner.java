@@ -170,10 +170,10 @@ public class TaskRunner {
 
 				case "OutputARObjectFromThermocalc"://ARBlockly
 					// 親のワークのパラメータに保存
-	//				TbWorkParamDao.registWorkParam(
-	//						work.parentId,
-	//						1,
-	//						"OutputARObjectFromThermocalc for RegistVRApp",
+					TbWorkParamDao.registWorkParam(
+							work.parentId,
+							1,
+							"OutputARObjectFromThermocalc for RegistVRApp",
 	//						ImageUtil.convertGrayScale(paramList.get(0).paramText)
 	//				);
 
@@ -188,8 +188,7 @@ public class TaskRunner {
 
 
 
-public class Main {
-    public static void main(String[] args) {
+    //public static void main(String[] args) {
         try {
             FileWriter fw = new FileWriter("test.txt");
             fw.write("テスト");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
@@ -197,7 +196,8 @@ public class Main {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }//データベースにファイル生成、書き込み
+		//	}
+    //データベースにファイル生成、書き込み
 
 		//end #2
 
@@ -281,7 +281,7 @@ try {
 
 
 //#end#3,4
-
+	);
 }
 					break;
 
