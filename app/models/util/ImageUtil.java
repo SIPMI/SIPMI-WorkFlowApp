@@ -15,6 +15,7 @@ import javax.swing.JButton;//
 import java.awt.FlowLayout;//
 import java.io.FileWriter;//
 import java.io.IOException;//
+import java.io.PrintWriter;//
 
 
 import javax.imageio.ImageIO;
