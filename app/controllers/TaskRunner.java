@@ -187,7 +187,7 @@ public class TaskRunner {
 //start #2
 
 
-　
+
 public class Main {
     public static void main(String[] args) {
         try {
@@ -197,7 +197,7 @@ public class Main {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }データベースにファイル生成、書き込み
+    }//データベースにファイル生成、書き込み
 
 		//end #2
 
