@@ -187,8 +187,8 @@ public class TaskRunner {
 //start #2
 
 
-
-    //public static void main(String[] args) {
+public class printing{
+    public static void main(String[] args) {
         try {
             FileWriter fw = new FileWriter("test.txt");
             fw.write("テスト");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
@@ -196,14 +196,14 @@ public class TaskRunner {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-		//	}
-    //データベースにファイル生成、書き込み
+			}
+    }//データベースにファイル生成、書き込み
 
 		//end #2
 
 		//start #3,4
 
-
+/*
 		// レイアウトを設定
      frame.setLayout(new FlowLayout());//frameはnewされてない、ここはResultの中にという意味
 		// ボタン1を作成
@@ -279,7 +279,7 @@ try {
 	 // ボタンをウィンドウに追加する
     frame.add(button1);
 
-
+*/
 //#end#3,4
 	);
 					break;
