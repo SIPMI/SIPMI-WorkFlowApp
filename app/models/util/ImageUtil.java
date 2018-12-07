@@ -11,6 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Base64;
+import javax.swing.JButton;//
+import java.awt.FlowLayout;//
+import java.io.FileWriter;//
+import java.io.IOException;//
+
 
 import javax.imageio.ImageIO;
 
