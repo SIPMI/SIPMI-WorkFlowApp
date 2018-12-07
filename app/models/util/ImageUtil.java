@@ -218,7 +218,7 @@ public class ImageUtil {
 			try {
             PrintWriter pw = new PrintWriter("/tmp/test.txt");
             //int a = 3,b = 5 ;
-            pw.format("%lf %lf %lf %lf %lf %lf", a, b, c,d,e,f);
+            pw.format("%d %d %d %d %d %d", a, b, c,d,e,f);
             pw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
