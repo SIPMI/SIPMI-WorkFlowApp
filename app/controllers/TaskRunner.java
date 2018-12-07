@@ -328,7 +328,7 @@ try {
 	    		}
 	    	}
 
-    }
+
 
     // ダミー判断
     private Boolean isDummy(List<TbWork> workList){
@@ -432,6 +432,4 @@ try {
 
 
     }
-
-
 }
