@@ -169,7 +169,7 @@ Blockly.Blocks['Binarization'] = {
  }
 };
 
-/*Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
+Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("OutputVRObjectFromThermocalc");
@@ -184,7 +184,7 @@ Blockly.Blocks['Binarization'] = {
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
-};*/
+};
 
 Blockly.Blocks['OutputARObjectFromThermocalc'] = {
   init: function() {
@@ -385,6 +385,12 @@ Blockly.JavaScript.OutputVRObjectFromThermocalc = function (block) {
     var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.OutputVRObjectFromThermocalc));\n";
     return code;
 };
+
+Blockly.JavaScript.OutputARObjectFromThermocalc = function (block) {
+    var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.OutputARObjectFromThermocalc));\n";
+    return code;
+};
+
 
 Blockly.JavaScript.ConvertGrayScale = function (block) {
   var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.ConvertGrayScale));\n";

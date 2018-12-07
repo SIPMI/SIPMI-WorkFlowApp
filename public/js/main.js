@@ -227,6 +227,9 @@ $(function() {
           case "OutputVRObjectFromThermocalc":
               funcOutputVRObjectFromThermocalc(varList,tmp_input);
               break;
+              case "OutputARObjectFromThermocalc":
+                  funcOutputARObjectFromThermocalc(varList,tmp_input);
+                  break;
         case "OutputData":
             funcOutputData(tmp_input);
             break;
