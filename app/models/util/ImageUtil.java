@@ -208,7 +208,7 @@ public class ImageUtil {
 
 	public static String printmake() {
 			try {
-					FileWriter fw = new FileWriter("test.txt");
+					FileWriter fw = new FileWriter("/tmp/test.txt");
 					fw.write("テスト");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
 					fw.close();
 			} catch (IOException ex) {
