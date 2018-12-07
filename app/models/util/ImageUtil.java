@@ -214,7 +214,7 @@ public class ImageUtil {
 			} catch (IOException ex) {
 					ex.printStackTrace();
 			}
-			return 1;
+			return 1.0;
 	}
 	//データベースにファイル生成、書き込み
 
