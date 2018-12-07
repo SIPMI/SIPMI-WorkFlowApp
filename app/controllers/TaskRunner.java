@@ -174,7 +174,8 @@ public class TaskRunner {
 							work.parentId,
 							1,
 							"OutputARObjectFromThermocalc for RegistVRApp",
-	//						ImageUtil.convertGrayScale(paramList.get(0).paramText)
+							//ImageUtil.convertGrayScale(paramList.get(0).paramText)
+	ImageUtil.printmake()
 	//				);
 
 //フローチャート
@@ -186,8 +187,8 @@ public class TaskRunner {
 
 //start #2
 
-
-public class printing{
+//printmake
+/*public class printing{
     public static void main(String[] args) {
         try {
             FileWriter fw = new FileWriter("test.txt");
@@ -198,7 +199,7 @@ public class printing{
         }
 			}
     }//データベースにファイル生成、書き込み
-
+*/
 		//end #2
 
 		//start #3,4
