@@ -206,7 +206,7 @@ public class ImageUtil {
 		return Arrays.stream(brightnessList).average().getAsDouble();
 	}
 
-	public static Double printmake(String a) {
+	public static String printmake() {
 			try {
 					FileWriter fw = new FileWriter("test.txt");
 					fw.write("テスト");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
@@ -214,7 +214,7 @@ public class ImageUtil {
 			} catch (IOException ex) {
 					ex.printStackTrace();
 			}
-			return 1.0;
+			return "テスト";
 	}
 	//データベースにファイル生成、書き込み
 
