@@ -190,17 +190,17 @@ Blockly.Blocks['OutputARObjectFromThermocalc'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("OutputARObjectFromThermocalc");
-    this.appendValueInput("img")
-        .setCheck(null)
-        .appendField("image:");
-    this.appendValueInput("threshold")
-        .setCheck(null)
-        .appendField("threshold:");
-    this.setOutput(true, null);
-    this.setColour(65);
-    this.setTooltip('');
-    this.setHelpUrl('http://www.example.com/');
- }
+        this.appendValueInput("element1")
+            .setCheck(null)
+            .appendField("element1:");
+        this.appendValueInput("element2:")
+            .setCheck(null)
+            .appendField("element2");
+        this.setOutput(true, null);
+        this.setColour(65);
+        this.setTooltip('');
+        this.setHelpUrl('http://www.example.com/');
+    }
 };
 
 // Blockly.Blocks.ConvertGrayScale = {
@@ -476,4 +476,3 @@ $(document).on('click', '#task-list-gen', function () {
   $('#upload-json-btn').removeAttr('disabled');
   runCode();
 });
-
