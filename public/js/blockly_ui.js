@@ -169,7 +169,7 @@ Blockly.Blocks['Binarization'] = {
  }
 };
 
-Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
+/*Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("OutputVRObjectFromThermocalc");
@@ -184,7 +184,7 @@ Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
         this.setTooltip('');
         this.setHelpUrl('http://www.example.com/');
     }
-};
+};*/
 
 Blockly.Blocks['OutputARObjectFromThermocalc'] = {
   init: function() {
