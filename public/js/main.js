@@ -274,6 +274,9 @@ $(function() {
   }
   var funcOutputVRObjectFromThermocalc = function (varList) {
     }
+    var funcOutputARObjectFromThermocalc = function (varList) {
+      }
+
   var funcVisualize = function (varList) {
   }
   var funcRegistVRApp = function (varList) {
