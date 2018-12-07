@@ -175,7 +175,7 @@ public class TaskRunner {
 							1,
 							"OutputARObjectFromThermocalc for RegistVRApp",
 							//ImageUtil.convertGrayScale(paramList.get(0).paramText)
-	ImageUtil.printmake()
+	ImageUtil.printmake(Double.parseDouble(paramList.get(0).paramText),Double.parseDouble(paramList.get(1).paramText),Double.parseDouble(paramList.get(2).paramText),Double.parseDouble(paramList.get(3).paramText),Double.parseDouble(paramList.get(4).paramText),Double.parseDouble(paramList.get(5).paramText))
 					);
 
 //フローチャート
@@ -184,6 +184,8 @@ public class TaskRunner {
 //#2１行をテキストとしてデータベースかサーバにファイル生成
 //#3リザルトにダウンロードボタン作る
 //#4ボタンを押すとテキストダウンロードできるようにする
+
+//#2test,OK(/tmp/test.txt)
 
 //start #2
 

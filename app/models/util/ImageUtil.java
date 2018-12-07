@@ -206,16 +206,24 @@ public class ImageUtil {
 		return Arrays.stream(brightnessList).average().getAsDouble();
 	}
 
-	public static String printmake() {
-			try {
+	public static String printmake(Double a,Double b,Double c,Double d,Double e,Double f) {
+			/*try {
 					FileWriter fw = new FileWriter("/tmp/test.txt");
-					fw.write("テスト");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
+					fw.write("テスト2");//本番では変数(printwriter?)pwformatで#1ごといけるかも？
 					fw.close();
 			} catch (IOException ex) {
 					ex.printStackTrace();
-			}
+			}*/
+			try {
+            PrintWriter pw = new PrintWriter("/tmp/test.txt");
+            //int a = 3,b = 5 ;
+            pw.format("%lf %lf %lf %lf %lf %lf", a, b, c,d,e,f);
+            pw.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+      }
 			return "テスト";
 	}
-	//データベースにファイル生成、書き込み
+	//サーバにファイル生成、書き込み
 
 }
