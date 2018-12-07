@@ -190,9 +190,9 @@ Blockly.Blocks['OutputARObjectFromThermocalc'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("OutputARObjectFromThermocalc");
-        this.appendValueInput("element1")
+        this.appendValueInput("img")
             .setCheck(null)
-            .appendField("element1:");
+            .appendField("image:");
         this.appendValueInput("element2:")
             .setCheck(null)
             .appendField("element2");
