@@ -217,14 +217,93 @@ public class ImageUtil {
 			}*/
 			try {
             PrintWriter pw = new PrintWriter("/tmp/test.txt");
-            //int a = 3,b = 5 ;
-            pw.format("%f %f %f %f %f %f", a, b, c,d,e,f);
+            //double  a = 3,b = 5 ,c=2,d=4,e=6,f=9;
+            pw.format("%f %f %f %f %f %f", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
             pw.close();
         } catch (IOException ex) {
             ex.printStackTrace();
       }
+			//本番
 			return "テスト";
 	}
 	//サーバにファイル生成、書き込み
+
+/*	public static String download() {
+			// レイアウトを設定
+	     frame.setLayout(new FlowLayout());//frameはnewされてない、ここはResultの中にという意味
+			// ボタン1を作成
+		 JButton button1 = new JButton("ボタン1");
+
+		 // ボタンを押した時の処理を設定
+		 button1.addActionListener(e -> {
+			 System.out.println("ボタン1が押された");//本番はここにダウンロード処理（#4)
+			 //ダウンロード処理開始
+
+			 // ダウンロード対象ファイルの読み込み用オブジェクト
+	FileInputStream fis = null;
+	InputStreamReader isr = null;
+
+	// ダウンロードファイルの書き出し用オブジェクト
+	OutputStream os = null;
+	OutputStreamWriter osw = null;
+
+	try {
+		// ダウンロード対象ファイルのFileオブジェクトを生成
+		File file = new File("ダウンロード対象ファイルのフルパス");
+
+		if (!file.exists() || !file.isFile()) {
+			// ファイルが存在しない場合のエラー処理
+		}
+
+		// レスポンスオブジェクトのヘッダー情報を設定
+		res.setContentType("application/octet-stream");
+		res.setHeader("Content-Disposition", "attachment; filename=" +
+			new String("ダイアログに表示するファイル名".getBytes("Windows-31J"), "ISO-8859-1"));
+
+		// ダウンロード対象ファイルの読み込み用オブジェクトを生成
+		fis = new FileInputStream(file);
+		isr = new InputStreamReader(fis, "ISO-8859-1");
+
+		// ダウンロードファイルの書き出し用オブジェクトを生成
+		os = res.getOutputStream();
+		osw = new OutputStreamWriter(os, "ISO-8859-1");
+
+		// IOストリームを用いてファイルダウンロードを行う
+		int i;
+		while ((i = isr.read()) != -1) {
+			osw.write(i);
+		}
+	} catch (FileNotFoundException e) {
+		// 例外発生時処理
+	} catch (UnsupportedEncodingException e) {
+		// 例外発生時処理
+	} catch (IOException e) {
+		// 例外発生時処理
+	} finally {
+		try {
+			// 各オブジェクトを忘れずにクローズ
+			if (osw != null) {
+				osw.close();
+			}
+			if (os != null) {
+				os.close();
+			}
+			if (isr != null) {
+				isr.close();
+			}
+			if (fis != null) {
+				fis.close();
+			}
+		} catch (IOException e) {
+			// 例外発生時処理
+		}
+	}
+
+	 //ダウンロード処理終了
+		 });
+		 // ボタンをウィンドウに追加する
+	    frame.add(button1);
+			return "テスト";
+	}*/
 
 }
