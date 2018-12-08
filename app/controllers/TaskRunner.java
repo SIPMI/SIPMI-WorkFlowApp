@@ -170,13 +170,12 @@ public class TaskRunner {
 
 				case "OutputARObjectFromThermocalc"://ARBlockly
 					// 親のワークのパラメータに保存
-					ImageUtil.printmake(Double.parseDouble(paramList.get(0).paramText),Double.parseDouble(paramList.get(1).paramText),Double.parseDouble(paramList.get(2).paramText),Double.parseDouble(paramList.get(3).paramText),Double.parseDouble(paramList.get(4).paramText),Double.parseDouble(paramList.get(5).paramText));
 
 					TbWorkParamDao.registWorkParam(
 							work.parentId,
 							1,
 							"OutputARObjectFromThermocalc for RegistVRApp",
-							ImageUtil.binarize((paramList.get(0).paramText), Double.parseDouble(paramList.get(1).paramText))
+							ImageUtil.printmake(Double.parseDouble(paramList.get(0).paramText),Double.parseDouble(paramList.get(1).paramText),Double.parseDouble(paramList.get(2).paramText),Double.parseDouble(paramList.get(3).paramText),Double.parseDouble(paramList.get(4).paramText),Double.parseDouble(paramList.get(5).paramText));
 
 							//ImageUtil.convertGrayScale(paramList.get(0).paramText)
 							//なぜか6数値全部ｙばかり、テキスト出力はOK
