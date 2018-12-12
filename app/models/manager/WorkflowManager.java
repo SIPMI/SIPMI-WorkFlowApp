@@ -39,6 +39,7 @@ public class WorkflowManager {
 
 		int sortNo = taskList.size();
 		Integer parentId = null;
+		int varListIndex = 0;
 		//逆順にしてループ
 		Collections.reverse(taskList);
 		for(String task : taskList){
