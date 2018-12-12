@@ -53,11 +53,11 @@ public class WorkflowManager {
 
 			if(task.startsWith("InputData")){
 				// ワークに対応するパラメータの登録
-	    		TbWorkParamDao.registWorkParam(workId, 1, "InputData", ImageUtil.createImageStringFromPath(varList.get(0)));
-	    	}
+	    		TbWorkParamDao.registWorkParam(workId, sortNo, "InputData", ImageUtil.createImageStringFromPath(varList.get(0)));
+	    	}//1をsortnoに変えれば？
 			else if("math_number".equals(task)){
 				// ワークに対応するパラメータの登録
-				TbWorkParamDao.registWorkParam(workId, 1, "InputVal", varList.get(1));
+				TbWorkParamDao.registWorkParam(workId, sortNo, "InputVal", varList.get(1));
 	    	}
 
 		}
