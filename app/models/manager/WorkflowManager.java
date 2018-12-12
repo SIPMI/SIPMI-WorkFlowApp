@@ -41,7 +41,7 @@ public class WorkflowManager {
 		Integer parentId = null;
 		int varListIndex = 0;
 		//逆順にしてループ
-		Collections.reverse(taskList);
+	//	Collections.reverse(taskList);
 		for(String task : taskList){
 
 			// ワークの登録
@@ -61,6 +61,7 @@ public class WorkflowManager {
 //				TbWorkParamDao.registWorkParam(workId, 1, "InputVal", varList.get(1));
 				TbWorkParamDao.registWorkParam(workId, 1, "InputVal", varList.get(varListIndex));
                 varListIndex++;//bloomsoftさん案
+								//順番がひっくり返った
 	    	}
 
 		}
