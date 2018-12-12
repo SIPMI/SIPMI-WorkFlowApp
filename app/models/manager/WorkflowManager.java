@@ -53,11 +53,11 @@ public class WorkflowManager {
 
 			if(task.startsWith("InputData")){
 				// ワークに対応するパラメータの登録
-	    		TbWorkParamDao.registWorkParam(workId, task, "InputData", ImageUtil.createImageStringFromPath(varList.get(0)));
+	    		TbWorkParamDao.registWorkParam(workId, task_id, "InputData", ImageUtil.createImageStringFromPath(varList.get(0)));
 	    	}//1をsortnoに変えれば？2つめしか表示されなくなった parentId?全部消えた
 			else if("math_number".equals(task)){
 				// ワークに対応するパラメータの登録
-				TbWorkParamDao.registWorkParam(workId, task, "InputVal", varList.get(1));
+				TbWorkParamDao.registWorkParam(workId, task_id, "InputVal", varList.get(1));
 	    	}
 
 		}
