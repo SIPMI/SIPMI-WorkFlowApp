@@ -44,7 +44,7 @@ public class WorkflowManager {
 		Collections.reverse(taskList);
 		Collections.reverse(varList);
 		for(String task : taskList){
-
+//
 			// ワークの登録
 			Integer workId = TbWorkDao.registWork(task, sortNo, parentId, workflowId);
 
@@ -65,8 +65,6 @@ public class WorkflowManager {
 								//順番がひっくり返った
 //								varListIndex--;
 	    	}
-
-
 		}
 	}
 
