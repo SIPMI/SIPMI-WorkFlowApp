@@ -217,8 +217,8 @@ public class ImageUtil {
 					ex.printStackTrace();
 			}*/
 			try {
-//            PrintWriter pw = new PrintWriter("/tmp/test.txt");
-						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/test.txt")));
+           PrintWriter pw = new PrintWriter("/tmp/test.txt");
+//						PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("/tmp/test.txt")));
             //double  aa = 1.0,ab = 2.0 ,ac=3.0, ad=4.0, ae=5.0, af=6.0;
             pw.format("%f %f %f %f %f %f", 1.0, 2.0, 3.0, 4.0, 5.0, 6.0);
 						//pw.format("%f %f %f %f %f %f", a, b, c, d, e, f);
