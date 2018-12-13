@@ -226,12 +226,12 @@ public class ImageUtil {
         } catch (IOException ex) {
             ex.printStackTrace();
       }
-			//本番
+			//本番kansei
 			return "テスト";
 	}
 	//サーバにファイル生成、書き込み
 
-/*	public static String download() {
+	public static String download() {
 			// レイアウトを設定
 	     frame.setLayout(new FlowLayout());//frameはnewされてない、ここはResultの中にという意味
 			// ボタン1を作成
@@ -307,6 +307,6 @@ public class ImageUtil {
 		 // ボタンをウィンドウに追加する
 	    frame.add(button1);
 			return "テスト";
-	}*/
+	}
 
 }
