@@ -231,7 +231,7 @@ public class ImageUtil {
 	}
 	//サーバにファイル生成、書き込み
 
-	public static String download() {
+/*	public static String download() {
 			// レイアウトを設定
 	     frame.setLayout(new FlowLayout());//frameはnewされてない、ここはResultの中にという意味
 			// ボタン1を作成
@@ -300,7 +300,7 @@ public class ImageUtil {
 		} catch (IOException e) {
 			// 例外発生時処理
 		}
-	}
+	}*/
 
 	 //ダウンロード処理終了
 		 });

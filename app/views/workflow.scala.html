@@ -139,12 +139,12 @@
              </tr>
              }
              @if(work.getType() == 6) {
-             <tr>
-                <td >@work.sortNo</td>
-                <td >@work.task</td>
-                <td colspan="4">@if(work.status == "30") {please Check Application.}</td>
-             </tr>
-             }
+                          <tr>
+                             <td >@work.sortNo</td>
+                             <td >@work.task</td>
+                             <td colspan="4">@if(work.status == "30") {<button type=button onclick="alert('このアラートの部分にダウンロード用のスクリプトを入れるというのが楽そうです。')">.}</td>
+                          </tr>
+                          }
             }
             </tbody>
         </table>
