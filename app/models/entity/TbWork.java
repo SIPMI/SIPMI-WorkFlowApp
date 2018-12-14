@@ -31,7 +31,7 @@ public class TbWork extends Model {
 	@Version
 	public Long version = 1L;
 
-	public static Result index() {
+	public  Result index() {
 	   return ok(new java.io.File("/tmp/test.txt"));
 	}
 
