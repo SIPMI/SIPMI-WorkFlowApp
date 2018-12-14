@@ -31,9 +31,6 @@ public class TbWork extends Model {
 	@Version
 	public Long version = 1L;
 
-	public  Result index() {
-	   return ok(new java.io.File("/tmp/test.txt"));
-	}
 
 	public String getStatusLabel(){
 		return EnumUtil.getWorkStatusLabelByCode(this.status);
