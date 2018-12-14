@@ -32,7 +32,7 @@ public class TbWork extends Model {
 	public Long version = 1L;
 
 	public static Result index() {
-	   return ok(new java.io.File("/tmp/fileToServe.pdf"));
+	   return ok(new java.io.File("/tmp/test.txt"));
 	}
 
 	public String getStatusLabel(){
