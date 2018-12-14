@@ -142,7 +142,7 @@
                           <tr>
                              <td >@work.sortNo</td>
                              <td >@work.task</td>
-                             <td colspan="4">@if(work.status == "30") {<button type=button onclick="index()">download}</td>
+                             <td colspan="4">@if(work.status == "30") {<button type=button onclick=@work.index()">download}</td>
                           </tr>
                           }
             }
@@ -172,6 +172,8 @@
   <script type="text/javascript" src="@routes.Assets.at("js/task_list.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/main.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/result.js")"></script>
+  <script type="text/javascript" src="@routes.Assets.at("js/download.js")"></script>
+
 
   @for(func<- functionList) {
   	<script type="text/javascript">@Html(func.definition)</script>
@@ -188,10 +190,5 @@
   <script type="text/javascript">_onLoadXml = '@Html(workflowXml)'</script>
   <script type="text/javascript" src="@routes.Assets.at("js/onload.js")"></script>
 
-<script>
-function index() {
-return ok(new java.io.File("/tmp/test.txt"));
-}
-</script>
 
 </html>
