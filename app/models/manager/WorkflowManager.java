@@ -39,10 +39,12 @@ public class WorkflowManager {
 
 		int sortNo = taskList.size();
 		Integer parentId = null;
-		//逆順にしてループ
+		int varListIndex = 0;
+		//逆順にしてループ result全部ひっくり返して正常に
 		Collections.reverse(taskList);
+		Collections.reverse(varList);
 		for(String task : taskList){
-
+//
 			// ワークの登録
 			Integer workId = TbWorkDao.registWork(task, sortNo, parentId, workflowId);
 
@@ -54,12 +56,15 @@ public class WorkflowManager {
 			if(task.startsWith("InputData")){
 				// ワークに対応するパラメータの登録
 	    		TbWorkParamDao.registWorkParam(workId, 1, "InputData", ImageUtil.createImageStringFromPath(varList.get(0)));
-	    	}
+	    	}//1をsortnoに変えれば？2つめしか表示されなくなった parentId?全部消えた taskはstring
 			else if("math_number".equals(task)){
 				// ワークに対応するパラメータの登録
-				TbWorkParamDao.registWorkParam(workId, 1, "InputVal", varList.get(1));
+//				TbWorkParamDao.registWorkParam(workId, 1, "InputVal", varList.get(1));
+				TbWorkParamDao.registWorkParam(workId, 1, "InputVal", varList.get(varListIndex));
+                varListIndex++;//bloomsoftさん案
+								//順番がひっくり返った
+//								varListIndex--;
 	    	}
-
 		}
 	}
 

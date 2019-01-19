@@ -186,6 +186,38 @@ Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
     }
 };
 
+Blockly.Blocks['OutputARObjectFromThermocalc'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("OutputARObjectFromThermocalc");
+    this.appendValueInput("x")
+        .setCheck(null)
+        .appendField("position_x");
+    this.appendValueInput("y")
+        .setCheck(null)
+        .appendField("position_y");
+    this.appendValueInput("z")
+        .setCheck(null)
+        .appendField("position_z");
+    this.appendValueInput("a")
+        .setCheck(null)
+        .appendField("rotation_x");
+    this.appendValueInput("b")
+        .setCheck(null)
+        .appendField("rotation_y");
+    this.appendValueInput("c")
+        .setCheck(null)
+        .appendField("rotation_z");
+/*    this.appendValueInput("threshold")
+        .setCheck(null)
+        .appendField("threshold:");*/
+    this.setOutput(true, null);
+    this.setColour(65);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+    }
+};
+
 // Blockly.Blocks.ConvertGrayScale = {
 //   init: function() {
 //     this.appendDummyInput()
@@ -199,13 +231,16 @@ Blockly.Blocks['OutputVRObjectFromThermocalc'] = {
 //   }
 // };
 
-Blockly.Blocks['ConvertGrayScale'] = {
+Blockly.Blocks['ConvertGrayScale'] = { // ARBlockly
   init: function() {
     this.appendDummyInput()
         .appendField("ConvertGrayScale");
-    this.appendValueInput("img")
-        .setCheck(null)
-        .appendField("image:");
+    this.appendValueInput("element1")
+            .setCheck(null)
+            .appendField("element1:");
+    this.appendValueInput("element2:")
+            .setCheck(null)
+            .appendField("element2");
     this.setOutput(true, null);
     this.setColour(65);
     this.setTooltip('');
@@ -365,6 +400,12 @@ Blockly.JavaScript.OutputVRObjectFromThermocalc = function (block) {
     var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.OutputVRObjectFromThermocalc));\n";
     return code;
 };
+
+Blockly.JavaScript.OutputARObjectFromThermocalc = function (block) {
+    var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.OutputARObjectFromThermocalc));\n";
+    return code;
+};
+
 
 Blockly.JavaScript.ConvertGrayScale = function (block) {
   var code = "TaskList.push(new SIPMI.Task(SIPMI.TaskType.ConvertGrayScale));\n";

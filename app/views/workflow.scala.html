@@ -55,6 +55,7 @@
                 <block type="ConvertGrayScale"></block>
                 <block type="CalcAverageBrightness"></block>
                 <block type="OutputVRObjectFromThermocalc"></block>
+                <block type="OutputARObjectFromThermocalc"></block>
               </category>
               <category name="Remote"  colour="100">
               @for(func <- functionList) {
@@ -138,12 +139,12 @@
              </tr>
              }
              @if(work.getType() == 6) {
-             <tr>
-                <td >@work.sortNo</td>
-                <td >@work.task</td>
-                <td colspan="4">@if(work.status == "30") {please Check Application.}</td>
-             </tr>
-             }
+                          <tr>
+                             <td >@work.sortNo</td>
+                             <td >@work.task</td>
+                             <td colspan="4">@if(work.status == "30") {<button type=button onclick="window.open('/ar', '_blank')">download}</td>
+                          </tr>
+                          }
             }
             </tbody>
         </table>
@@ -172,6 +173,7 @@
   <script type="text/javascript" src="@routes.Assets.at("js/main.js")"></script>
   <script type="text/javascript" src="@routes.Assets.at("js/result.js")"></script>
 
+
   @for(func<- functionList) {
   	<script type="text/javascript">@Html(func.definition)</script>
   }
@@ -187,8 +189,5 @@
   <script type="text/javascript">_onLoadXml = '@Html(workflowXml)'</script>
   <script type="text/javascript" src="@routes.Assets.at("js/onload.js")"></script>
 
+
 </html>
-
-
-
-

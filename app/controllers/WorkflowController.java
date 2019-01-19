@@ -78,7 +78,9 @@ public class WorkflowController extends BaseController {
 
 		return workList;
 	}
-
+	public static Result index() {
+	  return ok(new java.io.File("/tmp/test.txt"));
+	}
 
 //	private static String findWorkflowXmlByRequest(){
 //        String workflowXml = "";

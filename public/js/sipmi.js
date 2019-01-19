@@ -15,7 +15,7 @@ var SIPMI = (function () {
     SampleFunctionZ:  103,
     OutputData:  201,
     InputImage: 301,
-    InputImage: 302
+    InputImage: 302,
   };
 
   var InputFiles = {};

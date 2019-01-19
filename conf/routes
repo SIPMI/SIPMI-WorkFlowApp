@@ -38,3 +38,5 @@ POST    /binarization               controllers.ApiApplication.binarize()
 
 # For Let's Encrypt
 GET     /.well-known/acme-challenge/$key<.+> controllers.Application.letsEncrypt(key: String)
+
+GET     /ar               controllers.WorkflowController.index()
